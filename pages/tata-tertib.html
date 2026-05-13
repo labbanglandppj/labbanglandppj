@@ -1,0 +1,89 @@
+<div class="tata-tertib-page">
+
+  <h1 class="page-title">
+    TATA TERTIB
+  </h1>
+
+  <!-- 🔥 ACTION ADMIN -->
+  <div id="tataTertibAdminAction"
+       style="display:none; margin-bottom:20px; text-align:right;">
+
+    <button onclick="openTambahTataTertib()"
+      class="tata-btn-add">
+
+      ➕ Tambah Tata Tertib
+
+    </button>
+
+  </div>
+
+
+  <!-- 🔥 CARD -->
+  <div class="tata-tertib-card">
+
+    <!-- 🔥 HEADER -->
+    <div class="tata-header">
+
+      <div>
+
+        <h2>
+          FORMULIR TATA TERTIB SIMULATOR,
+          LABORATORIUM DAN WORKSHOP
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <!-- 🔥 TABLE -->
+    <div class="table-container tata-table-container">
+
+      <table class="tata-table">
+
+        <thead>
+          <tr>
+
+            <th>No</th>
+
+            <th>Peraturan / Tata Tertib</th>
+
+            <th id="tataAksiHeader"
+                style="display:none;">
+              Aksi
+            </th>
+
+          </tr>
+        </thead>
+
+        <tbody id="tataTertibBody">
+
+          <!-- DATA DARI LOCAL STORAGE -->
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+    <!-- 🔥 EMPTY STATE -->
+    <div id="tataEmptyState" class="tata-empty">
+
+      <div class="tata-empty-icon">
+        📘
+      </div>
+
+      <h3>
+        Belum Ada Tata Tertib
+      </h3>
+
+      <p>
+        Data tata tertib belum ditambahkan oleh admin.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

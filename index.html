@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LAB BANGLAND PPJ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      
+      <!-- ATAS -->
+      <div class="menu-atas">
+
+        <!-- 🔥 LOGO -->
+        <div class="logo-box">
+
+          <!-- 🔥 GLOW -->
+          <div class="logo-glow"></div>
+
+          <img src="assets/logo-ppj.png" alt="Logo PPJ">
+
+        </div>
+
+        <!-- 🔥 NAMA SISTEM -->
+        <div class="sidebar-system">
+
+          <div class="system-title">
+            SISTEM INVENTARIS
+          </div>
+
+          <div class="system-subtitle">
+            LABORATORIUM BANGUNAN DAN LANDASAN
+          </div>
+
+          <div class="system-campus">
+            POLITEKNIK PENERBANGAN JAYAPURA
+          </div>
+
+        </div>
+        
+        <div class="sidebar-divider"></div>
+
+        <!-- 🔥 ADMIN LABEL -->
+        <div id="adminBadge" style="
+          display:none;
+          background:#ef4444;
+          padding:6px;
+          border-radius:6px;
+          font-size:12px;
+          margin-bottom:10px;
+          text-align:center;
+        ">
+          🔴 ADMIN MODE
+        </div>
+
+        <ul class="sidebar-menu">
+
+          <!-- 🔥 LABEL MENU -->
+          <div class="menu-label">
+            MENU UTAMA
+          </div>
+
+          <li onclick="loadPage('dashboard')">
+            📊 DASHBOARD
+          </li>
+
+          <li onclick="loadPage('data-alat')">
+            🧪 DATA ALAT
+          </li>
+
+          <li onclick="loadPage('tata-tertib')">
+            📘 TATA TERTIB
+          </li>
+
+          <li id="menuMonitoring"
+              onclick="loadPage('monitoring')"
+              style="display:none;">
+            🛰️ MONITORING ALAT
+          </li>
+
+          <li id="menuRiwayat"
+              onclick="loadPage('riwayat')"
+              style="display:none;">
+            🕘 RIWAYAT
+          </li>
+
+        </ul>
+      </div>
+
+      <!-- BAWAH -->
+      <div class="menu-bawah">
+        <button id="authButton" onclick="handleAuth()" class="btn-login">
+          🔐 Login Admin
+        </button>
+      </div>
+
+    </div>
+
+
+    <!-- CONTENT -->
+    <div class="content" id="content">
+
+      <div class="hero-box">
+
+        <div class="hero-content">
+
+          <h1>
+            Sistem Inventaris <br>
+            <span class="judul-bawah">
+              Laboratorium Bangunan & Landasan
+            </span>
+          </h1>
+
+          <!-- 🔥 INSTANSI -->
+          <div class="hero-instansi">
+            Politeknik Penerbangan Jayapura
+          </div>
+          
+          <p class="hero-desc">
+            Sistem digital inventaris dan monitoring fasilitas
+            Laboratorium Bangunan & Landasan untuk mendukung
+            pengelolaan alat, proses audit, serta pemantauan
+            kondisi peralatan secara modern dan terintegrasi.
+          </p>
+
+          <div class="hero-feature">
+
+            <div class="feature-card">
+              <h3>📊 Monitoring</h3>
+              <span>Pemantauan kondisi alat</span>
+            </div>
+
+            <div class="feature-card">
+              <h3>🧪 Inventaris</h3>
+              <span>Data inventaris terpusat</span>
+            </div>
+
+            <div class="feature-card">
+              <h3>🛠 Maintenance</h3>
+              <span>Riwayat & monitoring alat</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  <!-- ========================= -->
+  <!-- 🔥 MODAL DETAIL -->
+  <!-- ========================= -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+
+      <span class="close" onclick="closeModal()">&times;</span>
+      
+      <img id="modalImage" src="" alt="Foto Alat"
+        style="width:100%; border-radius:10px; margin-bottom:10px;">
+
+      <h2 id="modalNama"></h2>
+
+      <p><b>Fungsi Alat:</b> <span id="modalFungsi"></span></p>
+      <p><b>Kondisi Alat:</b> <span id="modalKondisi"></span></p>
+      <p><b>Status Alat:</b> <span id="modalStatus"></span></p>
+      <p><b>Lokasi Alat:</b> <span id="modalLokasi"></span></p>
+
+      <p><b>Terakhir Dicek:</b> <span id="modalTanggal"></span></p>
+      <p><b>Status Monitoring:</b> <span id="modalMonitoring"></span></p>
+
+    </div>
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 🔐 MODAL LOGIN -->
+  <!-- ========================= -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+
+      <span class="close" onclick="closeLogin()">&times;</span>
+
+      <h2>Login Admin</h2>
+
+      <input type="text" id="username" placeholder="Username"
+        style="width:100%; padding:10px; margin:10px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <input type="password" id="password" placeholder="Password"
+        style="width:100%; padding:10px; margin:10px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <button onclick="login()" style="width:100%; padding:10px;">
+        Login
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- ➕ MODAL TAMBAH ALAT -->
+  <!-- ========================= -->
+  <div id="tambahModal" class="modal">
+    <div class="modal-content">
+
+      <span class="close" onclick="closeTambahModal()">&times;</span>
+
+      <h2 id="modalTitle">Tambah Data Alat</h2>
+
+      <input id="t_nama" placeholder="Nama Alat"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <input id="t_jumlah" type="number" placeholder="Jumlah Alat"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <!-- 🔥 KONDISI -->
+      <label>Kondisi Alat</label>
+      <select id="t_kondisi"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;">
+        <option value="Layak">Layak</option>
+        <option value="Perlu diperbaiki">Perlu diperbaiki</option>
+        <option value="Rusak">Rusak</option>
+      </select>
+
+      <!-- 🔥 STATUS -->
+      <label>Status Alat</label>
+      <select id="t_status"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;">
+        <option value="Bisa digunakan">Bisa digunakan</option>
+        <option value="Tidak bisa digunakan">Tidak bisa digunakan</option>
+      </select>
+
+      <input id="t_lokasi" placeholder="Lokasi Alat"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <textarea id="t_keterangan" placeholder="Keterangan Alat"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;"></textarea>
+
+      <!-- 🔥 UPLOAD GAMBAR -->
+      <label>Upload Gambar Alat</label>
+
+      <input type="file" id="t_gambar"
+        onchange="previewGambar()"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <!-- 🔥 PREVIEW GAMBAR -->
+      <img id="previewUpload"
+        style="width:100%; margin-top:10px; border-radius:8px; display:none;">
+
+      <button onclick="tambahData()" style="width:100%; padding:10px; margin-top:10px;">
+        Simpan
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 🖼️ MODAL FOTO FULL SCREEN -->
+  <!-- ========================= -->
+  <div id="imageModal" class="image-modal">
+
+    <!-- tombol kembali -->
+    <span class="close-btn" onclick="closeImageModal()">✖</span>
+
+    <!-- tombol download -->
+    <button class="download-btn" onclick="downloadImage()">
+      ⬇️ Download
+    </button>
+
+    <!-- gambar -->
+    <img id="previewImage" src="">
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 🔥 LOADING OVERLAY -->
+  <!-- ========================= -->
+  <div id="loadingOverlay">
+
+    <div class="loading-box">
+
+      <div class="loading-spinner"></div>
+
+      <div class="loading-text">
+        Menyimpan data...
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
+

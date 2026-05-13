@@ -1,0 +1,2443 @@
+/* ========================= */
+/* RESET */
+/* ========================= */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+
+  background:
+    linear-gradient(
+      rgba(15,23,42,0.35),
+      rgba(15,23,42,0.35)
+    ),
+    url("assets/bg-kanan.png") no-repeat center center fixed;
+
+  background-size: cover;
+
+  background-color: #f1f5f9;
+
+  overflow-x: auto;
+
+  position: relative;
+}
+
+/* 🔥 ANIMATED BACKGROUND OVERLAY */
+body::before {
+
+  content: "";
+
+  position: fixed;
+
+  top: -200px;
+  left: -200px;
+
+  width: 700px;
+  height: 700px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.18),
+      transparent 70%
+    );
+
+  z-index: -1;
+
+  animation:
+    bgMove 14s ease-in-out infinite alternate;
+}
+
+/* 🔥 GERAK GLOW */
+@keyframes bgMove {
+
+  0% {
+    transform:
+      translate(0px, 0px)
+      scale(1);
+  }
+
+  50% {
+    transform:
+      translate(120px, 60px)
+      scale(1.1);
+  }
+
+  100% {
+    transform:
+      translate(220px, 120px)
+      scale(0.95);
+  }
+}
+
+/* 🔥 SIDEBAR GLOW MOVE */
+@keyframes sidebarGlowMove {
+
+  0% {
+
+    transform:
+      translateX(-50%)
+      scale(1);
+
+    opacity: 0.7;
+  }
+
+  50% {
+
+    transform:
+      translateX(-50%)
+      scale(1.08);
+
+    opacity: 1;
+  }
+
+  100% {
+
+    transform:
+      translateX(-50%)
+      scale(0.94);
+
+    opacity: 0.75;
+  }
+}
+
+.container {
+  display: flex;
+}
+
+
+/* ========================= */
+/* SIDEBAR (FIX FINAL) */
+/* ========================= */
+.sidebar {
+  width: 320px;
+  height: 100vh;
+  box-sizing: border-box;
+
+  padding: 40px 22px 22px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15,23,42,0.96) 0%,
+      rgba(2,6,23,0.98) 100%
+    );
+
+  backdrop-filter: blur(18px);
+
+  border-right: 1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 0 40px rgba(37,99,235,0.18),
+    inset -1px 0 0 rgba(255,255,255,0.04);
+
+  z-index: 1000;
+
+  color: #ffffff;
+
+  overflow: visible;
+}
+
+/* 🔥 BLUE GLOW SIDEBAR */
+.sidebar::before {
+  content: "";
+
+  position: absolute;
+
+  width: 320px;
+  height: 320px;
+
+  filter: blur(30px);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.22),
+      transparent 70%
+    );
+
+  top: -120px;
+  left: -120px;
+
+  z-index: 0;
+}
+
+/* 🔥 BOTTOM GLOW */
+.sidebar::after {
+
+  content: "";
+
+  position: absolute;
+
+  bottom: -140px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 280px;
+  height: 280px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.28),
+      rgba(37,99,235,0.10),
+      transparent 72%
+    );
+
+  filter: blur(20px);
+
+  z-index: 0;
+
+  animation:
+    sidebarGlowMove 7s ease-in-out infinite alternate;
+}
+
+/* 🔥 SEMUA ISI DIATAS GLOW */
+.sidebar > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🔥 JUDUL */
+.sidebar h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+/* ========================= */
+/* 🔥 SIDEBAR SYSTEM TITLE */
+/* ========================= */
+
+.sidebar-system {
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 18px;
+  padding: 0 10px;
+}
+
+.sidebar-divider {
+
+  width: 100%;
+
+  height: 1px;
+
+  margin: 18px 0 22px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.18),
+      transparent
+    );
+}
+
+/* 🔥 JUDUL UTAMA */
+.system-title {
+
+  font-size: 17px;
+
+  font-weight: 800;
+
+  color: #ffffff;
+
+  letter-spacing: 0.8px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  margin-bottom: 4px;
+}
+
+/* 🔥 SUB JUDUL */
+.system-subtitle {
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  color: #dbeafe;
+
+  line-height: 1.5;
+
+  text-transform: uppercase;
+
+  margin-bottom: 8px;
+}
+
+/* 🔥 NAMA INSTANSI */
+.system-campus {
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  color: #94a3b8;
+
+  letter-spacing: 0.5px;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+}
+
+/* 🔥 MENU */
+.sidebar li {
+  padding: 14px 16px;
+
+  cursor: pointer;
+
+  border-radius: 14px;
+
+  margin-bottom: 10px;
+
+  transition: 0.35s;
+
+  color: #e2e8f0;
+
+  font-weight: 500;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+/* 🔥 HOVER */
+.sidebar li:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(59,130,246,0.22),
+      rgba(59,130,246,0.08)
+    );
+
+  padding-left: 24px;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 0 20px rgba(59,130,246,0.15);
+}
+
+/* 🔥 ACTIVE */
+.sidebar li.active {
+  background:
+    linear-gradient(
+      90deg,
+      #2563eb,
+      #3b82f6
+    );
+
+  color: #ffffff;
+
+  font-weight: 700;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.28);
+}
+
+.sidebar h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.subjudul {
+  font-size: 16px;
+  color: #94a3b8;
+  margin-bottom: 25px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+
+  position: relative;
+}
+
+.sidebar ul::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: -20px;
+  left: -20px;
+
+  width: 220px;
+  height: 220px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.08),
+      transparent 72%
+    );
+
+  pointer-events: none;
+}
+
+.sidebar li {
+  padding: 11px 12px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.sidebar li:hover {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  padding-left: 22px;
+
+  box-shadow:
+    0 8px 20px rgba(59,130,246,0.15);
+
+  color: #ffffff;
+}
+
+.sidebar li.active {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59,130,246,0.95),
+      rgba(37,99,235,0.88)
+    );
+
+  border: 1px solid rgba(255,255,255,0.12);
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.35);
+
+  color: #ffffff;
+}
+
+
+/* ========================= */
+/* MENU BAWAH (LOGIN) */
+/* ========================= */
+.menu-bawah {
+  margin-top: auto;
+
+  padding-top: 20px;
+}
+
+.btn-login {
+
+  width: 100%;
+
+  padding: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6
+    );
+
+  color: white;
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  transition: 0.35s ease;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.5px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 0 15px rgba(59,130,246,0.35),
+    0 0 35px rgba(37,99,235,0.28),
+    0 12px 30px rgba(37,99,235,0.25);
+
+  backdrop-filter: blur(12px);
+}
+
+.btn-login:hover {
+
+  transform:
+    translateY(-5px)
+    scale(1.02);
+
+  background:
+    linear-gradient(
+      135deg,
+      #1d4ed8,
+      #2563eb
+    );
+
+  box-shadow:
+    0 0 20px rgba(59,130,246,0.55),
+    0 0 50px rgba(37,99,235,0.45),
+    0 18px 40px rgba(37,99,235,0.35);
+}
+
+/* 🔥 EFEK KILAU */
+.btn-login::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 100%;
+  height: 100%;
+
+  background:
+    linear-gradient(
+      120deg,
+      transparent,
+      rgba(255,255,255,0.35),
+      transparent
+    );
+
+  transition: 0.7s;
+}
+
+/* 🔥 ANIMASI KILAU */
+.btn-login:hover::before {
+  left: 120%;
+}
+
+
+/* ========================= */
+/* CONTENT */
+/* ========================= */
+.content {
+  flex: 1;
+  padding: 50px;
+  margin-left: 320px;
+}
+
+/* ========================= */
+/* CARD DASHBOARD */
+/* ========================= */
+.card-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  width: 220px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin: 0;
+  color: #64748b;
+}
+
+.card p {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+
+/* ========================= */
+/* TABLE */
+/* ========================= */
+.table-container {
+
+  background: white;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+
+  overflow-x: auto;
+
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+table {
+
+  width: 100%;
+
+  min-width: 1100px;
+
+  border-collapse: collapse;
+
+  border-left: 1px solid #cbd5e1;
+
+  table-layout: fixed;
+}
+
+th {
+  background: #1e293b;
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+  border-right: 1px solid #334155; /* 🔥 GARIS HEADER */
+}
+
+td {
+  padding: 14px;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #e5e7eb; /* 🔥 TAMBAHAN GARIS VERTIKAL */
+  font-size: 14px;
+}
+
+tr:hover {
+  background: #f8fafc;
+}
+
+/* IMAGE */
+td img {
+  border-radius: 8px;
+}
+
+
+/* ========================= */
+/* BUTTON */
+/* ========================= */
+button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-right: 4px;
+  transition: 0.2s;
+}
+
+/* DETAIL */
+button:first-child {
+  background: #10b981;
+  color: white;
+}
+
+button:first-child:hover {
+  background: #059669;
+}
+
+/* EDIT */
+button:nth-child(2) {
+  background: #3b82f6;
+  color: white;
+}
+
+button:nth-child(2):hover {
+  background: #2563eb;
+}
+
+/* DELETE KHUSUS TOMBOL HAPUS */
+.action-delete {
+  background: #ef4444;
+  color: white;
+}
+
+.action-delete:hover {
+  background: #dc2626;
+}
+
+
+/* ========================= */
+/* BADGE KONDISI */
+/* ========================= */
+.badge-layak {
+  background: #10b981;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.badge-perbaiki {
+  background: #f59e0b;   /* lebih tajam */
+  color: white;          /* biar kontras */
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.badge-rusak {
+  background: #ef4444;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+
+/* ========================= */
+/* MODAL */
+/* ========================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+}
+
+/* BOX */
+.modal-content {
+  background: white;
+  margin: 40px auto; /* 🔥 lebih natural dari 5% */
+  padding: 20px;
+  width: 420px;
+  border-radius: 15px;
+  animation: fadeIn 0.3s;
+
+  /* 🔥 SCROLL FIX */
+  max-height: 80vh;       /* lebih kecil biar pasti scroll */
+  overflow-y: auto;       /* aktifkan scroll */
+  display: block;         /* pastikan tidak flex error */
+}
+
+/* IMAGE MODAL */
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* TEXT */
+.modal-content h2 {
+  margin: 10px 0;
+}
+
+.modal-content p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+/* CLOSE */
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+
+/* ========================= */
+/* ANIMATION */
+/* ========================= */
+@keyframes cardFloat {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🔥 HERO GLOW ANIMATION */
+@keyframes heroGlowMove {
+
+  0% {
+    transform:
+      translate(0px, 0px)
+      scale(1);
+
+    opacity: 0.85;
+  }
+
+  50% {
+    transform:
+      translate(-40px, -20px)
+      scale(1.08);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform:
+      translate(20px, -35px)
+      scale(0.96);
+
+    opacity: 0.78;
+  }
+}
+
+/* 🔥 FLOATING HERO */
+@keyframes heroFloating {
+
+  0% {
+    transform: translateY(-20px);
+  }
+
+  50% {
+    transform: translateY(-28px);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+/* 🔥 HERO TITLE REVEAL */
+@keyframes heroTitleReveal {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(35px)
+      scale(0.96);
+
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+/* 🔥 HERO BOX REVEAL */
+@keyframes heroBoxReveal {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      translateY(40px)
+      scale(0.96);
+
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform:
+      translateY(-20px)
+      scale(1);
+
+    filter: blur(0);
+  }
+}
+
+
+/* ===================================================== */
+/* 🔥🔥🔥 TAMBAHAN ADMIN MODE (JANGAN DIUBAH YANG ATAS) */
+/* ===================================================== */
+
+.admin-badge {
+  display: none;
+  margin-top: 15px;
+  padding: 10px;
+  text-align: center;
+  background: #ef4444;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 12px;
+  animation: fadeIn 0.3s;
+}
+
+body.admin-mode {
+  background: #fff7f7;
+}
+
+body.admin-mode .sidebar {
+  background: linear-gradient(180deg, #7f1d1d, #450a0a);
+}
+
+body.admin-mode .btn-login {
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6
+    );
+}
+
+body.admin-mode .btn-login:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #1d4ed8,
+      #2563eb
+    );
+}
+
+body.admin-mode .table-container {
+  box-shadow: 0 0 0 2px #ef4444;
+}
+
+body.admin-mode th {
+  background: #7f1d1d;
+}
+
+
+/* ===================================================== */
+/* 🔥 PREMIUM LOADING OVERLAY */
+/* ===================================================== */
+
+#loadingOverlay {
+  display: none;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 99999;
+
+  background: rgba(15,23,42,0.45);
+
+  backdrop-filter: blur(8px);
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔥 BOX */
+.loading-box {
+  width: 260px;
+
+  padding: 35px 30px;
+
+  border-radius: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.22),
+      rgba(255,255,255,0.08)
+    );
+
+  border: 1px solid rgba(255,255,255,0.18);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 50px rgba(37,99,235,0.22),
+    0 0 40px rgba(59,130,246,0.12);
+
+  text-align: center;
+
+  animation: fadeIn 0.25s ease;
+}
+
+/* 🔥 SPINNER */
+.loading-spinner {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 20px auto;
+
+  border-radius: 50%;
+
+  border:
+    5px solid rgba(255,255,255,0.18);
+
+  border-top:
+    5px solid #3b82f6;
+
+  animation:
+    loadingSpin 1s linear infinite;
+
+  box-shadow:
+    0 0 25px rgba(59,130,246,0.35);
+}
+
+/* 🔥 TEXT */
+.loading-text {
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.3px;
+}
+
+/* 🔥 SPIN */
+@keyframes loadingSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* 🔥 RATA TENGAH KOLOM TERTENTU */
+table th:nth-child(1),
+table td:nth-child(1),  /* No */
+
+table th:nth-child(3),
+table td:nth-child(3),  /* Jumlah */
+
+table th:nth-child(4),
+table td:nth-child(4),  /* Kondisi */
+
+table th:nth-child(7),
+table td:nth-child(7),  /* Foto */
+
+table th:nth-child(8),
+table td:nth-child(8) { /* Aksi */
+  text-align: center;
+}
+
+
+/* 🔥 MASTER LEBAR SEMUA KOLOM */
+
+table th:nth-child(1),
+table td:nth-child(1) { width: 30px; }   /* No */
+
+table th:nth-child(2),
+table td:nth-child(2) { width: 220px; }  /* Nama Alat */
+
+table th:nth-child(3),
+table td:nth-child(3) { width: 80px; }  /* Jumlah */
+
+table th:nth-child(4),
+table td:nth-child(4) { width: 100px; }  /* Kondisi */
+
+table th:nth-child(5),
+table td:nth-child(5) { width: 130px; }  /* Status */
+
+table th:nth-child(6),
+table td:nth-child(6) { width: 180px; }  /* Lokasi */
+
+table th:nth-child(7),
+table td:nth-child(7) { width: 130px; }  /* Foto */
+
+/* 🔥 KOLOM AKSI VERTIKAL */
+table th:nth-child(8),
+table td:nth-child(8) { 
+  width: 90px;
+}
+
+/* 🔥 BUTTON JADI KE BAWAH */
+table td:nth-child(8) button {
+  display: block;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+
+/* 🔥 BIAR LEBAR KOLOM PATUH ANGKA */
+table {
+  table-layout: fixed;
+}
+
+
+/* 🔥 BIAR TEKS TURUN (WRAP) */
+td {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+
+/* 🔥 FOTO PROPORSIONAL */
+td:nth-child(7) img {
+  width: 90px;
+  height: 65px;
+  object-fit: cover;
+}
+
+
+/* ========================= */
+/* 🖼️ IMAGE FULL SCREEN VIEWER */
+/* ========================= */
+
+.image-modal {
+  display: none; /* ✅ hanya ini */
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+
+  justify-content: center;
+  align-items: center;
+}
+
+/* gambar */
+.image-modal img {
+  max-width: 95%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* tombol close (kiri atas) */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* tombol download (kanan atas) */
+.download-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card:nth-child(2) {
+  border-left: 5px solid #10b981; /* hijau */
+}
+
+.card:nth-child(3) {
+  border-left: 5px solid #f59e0b; /* kuning */
+}
+
+.card:nth-child(4) {
+  border-left: 5px solid #ef4444; /* merah */
+}
+
+/* ========================= */
+/* LOGO INSTANSI */
+/* ========================= */
+
+.logo-box {
+
+  text-align: center;
+
+  margin-bottom: 8px;
+
+}
+
+.logo-box img {
+
+  width: 100px;
+
+  height: auto;
+
+  object-fit: contain;
+
+  border-radius: 0;
+
+  background: transparent;
+
+  padding: 0;
+
+  box-shadow: none;
+}
+
+
+/* ========================= */
+/* HERO DASHBOARD */
+/* ========================= */
+
+.hero-box {
+  min-height: 80vh;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 30px;
+}
+
+.hero-content {
+  max-width: 980px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.58),
+      rgba(255,255,255,0.18)
+    );
+
+  backdrop-filter: blur(22px);
+
+  padding: 35px 55px 55px;
+
+  border-radius: 38px;
+
+  border: 1px solid rgba(255,255,255,0.45);
+
+  box-shadow:
+    0 30px 80px rgba(15,23,42,0.22),
+    0 0 80px rgba(59,130,246,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.55);
+
+  position: relative;
+
+  overflow: hidden;
+
+transform: translateY(-20px);
+
+transition: 0.4s;
+
+animation:
+  heroBoxReveal 1.2s ease,
+  heroFloating 5s ease-in-out infinite;
+}
+
+/* 🔥 ANIMATED GLOW EFFECT */
+.hero-content::before {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.28),
+      rgba(37,99,235,0.12),
+      transparent 72%
+    );
+
+  bottom: -220px;
+  right: -180px;
+
+  z-index: 0;
+
+  filter: blur(10px);
+
+  animation:
+    heroGlowMove 8s ease-in-out infinite alternate;
+}
+
+/* 🔥 LIGHT EFFECT ATAS */
+.hero-content::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.85),
+      transparent
+    );
+}
+
+/* 🔥 SEMUA ISI DIATAS GLOW */
+.hero-content > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* 🔥 HOVER PREMIUM */
+.hero-content:hover {
+  transform: translateY(-24px);
+
+  box-shadow:
+    0 30px 80px rgba(37,99,235,0.28),
+    0 0 70px rgba(59,130,246,0.18);
+}
+
+.hero-badge {
+  display: inline-block;
+
+  background: rgba(37,99,235,0.12);
+  color: #2563eb;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  margin-bottom: 22px;
+}
+
+.hero-content h1 {
+  font-size: 47px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  letter-spacing: -2px;
+
+  margin-bottom: 25px;
+
+  color: #0f172a;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  animation:
+    heroTitleReveal 1.2s ease;
+}
+
+/* 🔥 NAMA INSTANSI HERO */
+.hero-instansi {
+  margin-top: -5px;
+
+  margin-bottom: 28px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #0f172a;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+
+  text-align: center;
+
+  opacity: 0.75;
+}
+
+.hero-desc {
+  font-size: 18px;
+
+  line-height: 1.9;
+
+  color: #334155;
+
+  text-align: justify;
+
+  max-width: 920px;
+
+  margin:
+    0 auto 42px auto;
+
+  font-weight: 500;
+}
+
+.hero-feature {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 26px;
+
+  flex-wrap: wrap;
+}
+
+.feature-card {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.88),
+      rgba(255,255,255,0.72)
+    );
+
+  width: 210px;
+
+  min-height: 105px;
+
+  padding: 22px;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.55);
+
+  backdrop-filter: blur(12px);
+
+  box-shadow:
+    0 10px 30px rgba(37,99,235,0.10);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border 0.35s ease;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  position: relative;
+
+  overflow: hidden;
+
+  animation:
+  cardFloat 5s ease-in-out infinite;
+}
+
+/* 🔥 FEATURE GLOW */
+.feature-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: -80px;
+  right: -80px;
+
+  width: 180px;
+  height: 180px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,0.16),
+      transparent 70%
+    );
+
+  opacity: 0;
+
+  transition: 0.35s;
+}
+
+/* 🔥 GLOW MUNCUL */
+.feature-card:hover::before {
+
+  opacity: 1;
+}
+
+/* 🔥 EFFECT HOVER PREMIUM */
+.feature-card:hover {
+
+  transform:
+    translateY(-10px)
+    scale(1.03);
+
+  border: 1px solid rgba(59,130,246,0.35);
+
+  box-shadow:
+    0 18px 40px rgba(37,99,235,0.18),
+    0 0 25px rgba(59,130,246,0.18);
+
+  background:
+    linear-gradient(
+      135deg,
+    rgba(255,255,255,0.98),
+    rgba(255,255,255,0.82)
+    );
+}
+
+.feature-card h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+
+/* 🔥 TEKS CARD */
+.feature-card span {
+  color: #64748b;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+}
+
+/* ========================= */
+/* 📡 MONITORING PAGE */
+/* ========================= */
+
+.monitoring-title {
+
+  font-size: 38px;
+
+  font-weight: 800;
+
+  color: #0f172a;
+
+  margin-bottom: 25px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+}
+
+/* 🔥 CARD MONITORING */
+.monitoring-card {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.78),
+      rgba(255,255,255,0.52)
+    );
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 28px;
+
+  padding: 25px;
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,0.10),
+    0 0 40px rgba(59,130,246,0.10);
+
+  overflow: hidden;
+
+  animation: fadeIn 0.4s ease;
+}
+
+/* 🔥 TABLE MONITORING */
+.monitoring-card table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  overflow: hidden;
+
+  border-radius: 18px;
+}
+
+.monitoring-card th {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b
+    );
+
+  color: white;
+
+  padding: 16px;
+
+  font-size: 14px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.monitoring-card td {
+
+  padding: 16px;
+
+  background: rgba(255,255,255,0.72);
+
+  border-bottom: 1px solid rgba(203,213,225,0.55);
+
+  font-size: 14px;
+
+  color: #0f172a;
+}
+
+/* 🔥 HOVER */
+.monitoring-card tr:hover td {
+
+  background: rgba(219,234,254,0.55);
+
+  transition: 0.3s;
+}
+
+/* 🔥 BADGE STATUS */
+.monitoring-card .badge-layak,
+.monitoring-card .badge-perbaiki,
+.monitoring-card .badge-rusak {
+
+  display: inline-block;
+
+  min-width: 150px;
+
+  text-align: center;
+
+  padding: 8px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+/* 🔥 RESPONSIVE */
+@media screen and (max-width: 900px) {
+
+  .monitoring-card {
+
+    overflow-x: auto;
+  }
+
+  .monitoring-card table {
+
+    min-width: 850px;
+  }
+}
+
+/* ========================= */
+/* 🔥 MONITOR FILTER */
+/* ========================= */
+
+.monitoring-subtitle {
+
+  color: #475569;
+
+  margin-top: -10px;
+
+  margin-bottom: 28px;
+
+  font-size: 15px;
+}
+
+.monitoring-filter {
+
+  display: flex;
+
+  gap: 18px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 28px;
+}
+
+.monitor-box {
+
+  width: 180px;
+
+  padding: 18px;
+
+  border-radius: 22px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.72),
+      rgba(255,255,255,0.42)
+    );
+
+  backdrop-filter: blur(16px);
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+    0 10px 25px rgba(15,23,42,0.08);
+}
+
+.monitor-box:hover {
+
+  transform:
+    translateY(-6px);
+
+  box-shadow:
+    0 18px 35px rgba(37,99,235,0.15);
+}
+
+.monitor-box.active {
+
+  border: 2px solid #2563eb;
+
+  box-shadow:
+    0 0 20px rgba(37,99,235,0.25);
+}
+
+.monitor-dot {
+
+  width: 14px;
+  height: 14px;
+
+  border-radius: 50%;
+
+  margin-bottom: 14px;
+}
+
+.monitor-dot.green {
+  background: #10b981;
+}
+
+.monitor-dot.yellow {
+  background: #f59e0b;
+}
+
+.monitor-dot.red {
+  background: #ef4444;
+}
+
+.monitor-box h3 {
+
+  margin: 0 0 8px;
+
+  font-size: 16px;
+
+  color: #0f172a;
+}
+
+.monitor-box span {
+
+  font-size: 13px;
+
+  color: #64748b;
+
+  line-height: 1.5;
+}
+
+/* ========================= */
+/* 🔥 PAGE TITLE */
+/* ========================= */
+
+.page-title {
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  font-size: 54px;
+
+  font-weight: 900;
+
+  letter-spacing: 2px;
+
+  color: #0f172a;
+
+  margin-bottom: 30px;
+
+  text-shadow:
+    0 2px 10px rgba(255,255,255,0.35);
+}
+
+/* ========================= */
+/* 🔥 MONITORING HEADER CENTER */
+/* ========================= */
+
+.monitoring-subtitle {
+
+  text-align: center;
+
+  font-size: 18px;
+
+  color: #475569;
+
+  margin-top: -10px;
+
+  margin-bottom: 35px;
+}
+
+
+/* 🔥 CARD MONITORING RATA TENGAH */
+.monitoring-filter {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 18px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 30px;
+}
+
+/* ========================= */
+/* 🔥 TABEL MONITORING */
+/* ========================= */
+
+.monitoring-table {
+
+  width: 100%;
+
+  table-layout: fixed;
+}
+
+
+/* NO */
+.monitoring-table th:nth-child(1),
+.monitoring-table td:nth-child(1) {
+  width: 20px;
+  text-align: center;
+}
+
+/* NAMA ALAT */
+.monitoring-table th:nth-child(2),
+.monitoring-table td:nth-child(2) {
+  width: 300px;
+}
+
+/* KONDISI */
+.monitoring-table th:nth-child(3),
+.monitoring-table td:nth-child(3) {
+  width: 80px;
+  text-align: center;
+}
+
+/* STATUS */
+.monitoring-table th:nth-child(4),
+.monitoring-table td:nth-child(4) {
+  width: 120px;
+  text-align: center;
+}
+
+/* TERAKHIR DICEK */
+.monitoring-table th:nth-child(5),
+.monitoring-table td:nth-child(5) {
+  width: 120px;
+  text-align: center;
+}
+
+/* STATUS MONITORING */
+.monitoring-table th:nth-child(6),
+.monitoring-table td:nth-child(6) {
+  width: 120px;
+  text-align: center;
+}
+
+/* ========================= */
+/* 🔥 RESPONSIVE ZOOM FIX */
+/* ========================= */
+
+.content {
+
+  overflow-x: auto;
+
+  width: calc(100vw - 320px);
+
+  box-sizing: border-box;
+}
+
+/* 🔥 SEMUA TABEL BISA SCROLL */
+.table-container,
+.monitoring-card {
+
+  overflow-x: auto;
+}
+
+/* ========================= */
+/* 🔥 AUTO FIT TABEL */
+/* ========================= */
+
+.table-container {
+
+  width: 100%;
+
+  overflow-x: auto;
+}
+
+/* 🔥 CONTENT FLEXIBLE */
+.content {
+
+  width: calc(100vw - 320px);
+
+  max-width: calc(100vw - 320px);
+
+  overflow-x: auto;
+
+  box-sizing: border-box;
+}
+
+/* ========================= */
+/* 📘 TATA TERTIB PAGE */
+/* ========================= */
+
+.tata-tertib-page {
+
+  animation: fadeIn 0.4s ease;
+}
+
+/* 🔥 CARD */
+.tata-tertib-card {
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.78),
+      rgba(255,255,255,0.52)
+    );
+
+  backdrop-filter: blur(18px);
+
+  border-radius: 28px;
+
+  padding: 28px;
+
+  border: 1px solid rgba(255,255,255,0.4);
+
+  box-shadow:
+    0 20px 50px rgba(15,23,42,0.10),
+    0 0 40px rgba(59,130,246,0.10);
+
+  overflow: hidden;
+}
+
+/* 🔥 HEADER */
+.tata-header {
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  margin-bottom: 25px;
+
+  gap: 20px;
+}
+
+.tata-header h2 {
+
+  width: 100%;
+
+  text-align: center;
+}
+
+/* 🔥 BADGE */
+.tata-badge {
+
+  display: inline-block;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37,99,235,0.15),
+      rgba(59,130,246,0.08)
+    );
+
+  color: #2563eb;
+
+  padding: 10px 18px;
+
+  border-radius: 999px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  margin-bottom: 15px;
+}
+
+/* 🔥 TITLE */
+.tata-header h2 {
+
+  margin: 0;
+
+  font-size: 28px;
+
+  line-height: 1.4;
+
+  color: #0f172a;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+
+  text-align: center;
+}
+
+/* 🔥 BUTTON */
+.tata-btn-add {
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6
+    );
+
+  color: white;
+
+  border: none;
+
+  padding: 12px 20px;
+
+  border-radius: 14px;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,0.25);
+}
+
+.tata-btn-add:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 16px 35px rgba(37,99,235,0.35);
+}
+
+/* 🔥 TABLE */
+.tata-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+
+  min-width: 900px;
+}
+
+.tata-table th {
+
+  background:
+    linear-gradient(
+      135deg,
+      #0f172a,
+      #1e293b
+    );
+
+  color: white;
+
+  padding: 16px;
+
+  font-size: 14px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.5px;
+}
+
+.tata-table td {
+
+  background: rgba(255,255,255,0.75);
+
+  padding: 18px 16px;
+
+  border-bottom:
+    1px solid rgba(203,213,225,0.5);
+
+  color: #0f172a;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+
+  vertical-align: top;
+}
+
+/* 🔥 HOVER */
+.tata-table tr:hover td {
+
+  background:
+    rgba(219,234,254,0.35);
+
+  transition: 0.3s;
+}
+
+/* 🔥 KOLOM */
+.tata-table th:nth-child(1),
+.tata-table td:nth-child(1) {
+
+  width: 30px;
+
+  text-align: center;
+}
+
+.tata-table th:nth-child(2),
+.tata-table td:nth-child(2) {
+
+  width: 78%;
+}
+
+.tata-table th:nth-child(3),
+.tata-table td:nth-child(3) {
+
+  width: 120px;
+
+  text-align: center;
+}
+
+/* 🔥 EMPTY */
+.tata-empty {
+
+  text-align: center;
+
+  padding: 70px 20px;
+}
+
+.tata-empty-icon {
+
+  font-size: 65px;
+
+  margin-bottom: 18px;
+}
+
+.tata-empty h3 {
+
+  margin-bottom: 10px;
+
+  color: #0f172a;
+
+  font-size: 24px;
+}
+
+.tata-empty p {
+
+  color: #64748b;
+
+  font-size: 15px;
+}
+
+/* 🔥 RESPONSIVE */
+@media screen and (max-width: 900px) {
+
+  .tata-header h2 {
+
+    font-size: 22px;
+  }
+
+  .tata-tertib-card {
+
+    padding: 18px;
+  }
+
+  .tata-table {
+
+    min-width: 850px;
+  }
+}
+
+/* 🔥 AKSI TATA TERTIB */
+.tata-aksi {
+
+  text-align: center;
+
+  vertical-align: top;
+
+  white-space: nowrap;
+
+  padding-top: 18px;
+}
+
+.tata-aksi button {
+
+  display: inline-block;
+
+  margin: 2px;
+
+  width: auto;
+
+  padding: 6px 12px;
+
+  font-size: 12px;
+
+  border-radius: 8px;
+}
+
+/* 🔥 MODE PENGUNJUNG (TANPA AKSI) */
+.tata-table:not(:has(#tataAksiHeader[style*="table-cell"])) th:nth-child(1),
+.tata-table:not(:has(#tataAksiHeader[style*="table-cell"])) td:nth-child(1) {
+
+  width: 30px;
+
+  text-align: center;
+}
+
+.tata-table:not(:has(#tataAksiHeader[style*="table-cell"])) th:nth-child(2),
+.tata-table:not(:has(#tataAksiHeader[style*="table-cell"])) td:nth-child(2) {
+
+  width: auto;
+}
+
+/* ===================================== */
+/* 📱 RESPONSIVE MOBILE */
+/* ===================================== */
+@media screen and (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .container {
+    flex-direction: column;
+  }
+
+  /* ========================= */
+  /* SIDEBAR MOBILE */
+  /* ========================= */
+  .sidebar {
+
+    position: relative;
+
+    width: 100%;
+
+    height: auto;
+
+    padding: 20px 16px;
+
+    border-right: none;
+
+    border-bottom:
+      1px solid rgba(255,255,255,0.08);
+  }
+
+  .sidebar::before,
+  .sidebar::after {
+    display: none;
+  }
+
+  .logo-box img {
+    width: 75px;
+  }
+
+  .system-title {
+    font-size: 15px;
+  }
+
+  .system-subtitle {
+    font-size: 10px;
+  }
+
+  .system-campus {
+    font-size: 10px;
+  }
+
+  .sidebar-menu li {
+
+    font-size: 14px;
+
+    padding: 12px;
+  }
+
+  .btn-login {
+
+    padding: 12px;
+
+    font-size: 14px;
+  }
+
+  /* ========================= */
+  /* CONTENT MOBILE */
+  /* ========================= */
+  .content {
+
+    margin-left: 0;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 20px 14px;
+
+    overflow-x: hidden;
+  }
+
+  /* ========================= */
+  /* HERO */
+  /* ========================= */
+  .hero-box {
+
+    min-height: auto;
+
+    padding-top: 10px;
+  }
+
+  .hero-content {
+
+    width: 100%;
+
+    padding: 25px 18px;
+
+    border-radius: 24px;
+
+    transform: none;
+  }
+
+  .hero-content h1 {
+
+    font-size: 28px;
+
+    line-height: 1.3;
+  }
+
+  .hero-instansi {
+
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+  .hero-desc {
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    text-align: left;
+  }
+
+  .hero-feature {
+
+    flex-direction: column;
+
+    gap: 14px;
+  }
+
+  .feature-card {
+
+    width: auto;
+
+    min-height: auto;
+  }
+
+  /* ========================= */
+  /* PAGE TITLE */
+  /* ========================= */
+  .page-title {
+
+    font-size: 34px;
+
+    line-height: 1.3;
+
+    margin-bottom: 20px;
+  }
+
+  /* ========================= */
+  /* DASHBOARD CARD */
+  /* ========================= */
+  .card-container {
+
+    flex-direction: column;
+  }
+
+  .card {
+
+    width: auto;
+  }
+
+  /* ========================= */
+  /* TABLE */
+  /* ========================= */
+  .table-container,
+  .monitoring-card,
+  .tata-tertib-card {
+
+    overflow-x: auto;
+  }
+
+  table,
+  .monitoring-table,
+  .tata-table {
+
+    min-width: 900px;
+  }
+
+  /* ========================= */
+  /* MODAL */
+  /* ========================= */
+  .modal-content {
+
+    width: 92%;
+
+    margin: 20px auto;
+
+    padding: 18px;
+
+    max-height: 85vh;
+  }
+
+  /* ========================= */
+  /* MONITOR FILTER */
+  /* ========================= */
+  .monitoring-filter {
+
+    flex-direction: column;
+  }
+
+  .monitor-box {
+
+    width: auto;
+  }
+
+  /* ========================= */
+  /* TATA TERTIB */
+  /* ========================= */
+  .tata-header h2 {
+
+    font-size: 20px;
+
+    line-height: 1.5;
+  }
+
+  .tata-btn-add {
+
+    width: 100%;
+  }
+
+}

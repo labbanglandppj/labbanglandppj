@@ -1,0 +1,92 @@
+<div class="monitoring-page">
+
+  <h1 class="page-title">
+    MONITORING ALAT
+  </h1>
+
+  <p class="monitoring-subtitle">
+    Monitoring kondisi dan status pengecekan alat laboratorium
+  </p>
+
+  <!-- 🔥 FILTER -->
+  <div class="monitoring-filter">
+
+    <div class="monitor-box active"
+      onclick="filterMonitoring('all', this)">
+
+      <div class="monitor-dot green"></div>
+
+      <h3>SEMUA</h3>
+
+      <span>
+        Tampilkan seluruh alat
+      </span>
+
+    </div>
+
+    <div class="monitor-box"
+      onclick="filterMonitoring('aman', this)">
+
+      <div class="monitor-dot green"></div>
+
+      <h3>AMAN</h3>
+
+      <span>
+        Kondisi aman
+      </span>
+
+    </div>
+
+    <div class="monitor-box"
+      onclick="filterMonitoring('perlu', this)">
+
+      <div class="monitor-dot yellow"></div>
+
+      <h3>PERLU TINDAKAN</h3>
+
+      <span>
+        Perlu diperbaiki
+      </span>
+
+    </div>
+
+    <div class="monitor-box"
+      onclick="filterMonitoring('rusak', this)">
+
+      <div class="monitor-dot red"></div>
+
+      <h3>RUSAK BERAT</h3>
+
+      <span>
+        Tidak bisa digunakan
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- 🔥 TABLE -->
+  <div class="monitoring-card">
+
+    <table class="monitoring-table">
+
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Alat</th>
+          <th>Kondisi</th>
+          <th>Status</th>
+          <th>Terakhir Dicek</th>
+          <th>Status Monitoring</th>
+        </tr>
+      </thead>
+
+      <tbody id="monitoringBody">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
