@@ -1,6 +1,5 @@
 // 🔥 URL API GOOGLE APPS SCRIPT
-const API_URL = "https://script.google.com/macros/s/AKfycbwm8alHIHcH-wIqgFmz0NT5TCe4lOjVIppnPFyvQOeGuBb6krUXCBy5aIaidC1MJQhp/exec";
-
+const API_URL = "https://script.google.com/macros/s/AKfycbx7MwGGPT_P2_fOuq3NLXtQ7qYQ8reAEIFG7jt2c9uXM8E5AQVO11uKQ2A7c3rZ4lGY/exec";
 
 // ============================
 // 🔐 LOGIN SYSTEM
@@ -1145,6 +1144,46 @@ function hapusTataTertib(id) {
     alert("Error hapus tata tertib");
 
   });
+}
+
+
+// ============================
+// 🔍 SEARCH DATA ALAT
+// ============================
+function searchDataAlat() {
+
+  const input =
+    document.getElementById("searchInput");
+
+  if (!input) return;
+
+  const filter =
+    input.value.toLowerCase();
+
+  const rows =
+    document.querySelectorAll(
+      "#tableBody tr"
+    );
+
+  rows.forEach(row => {
+
+    const namaAlat =
+      row.children[1]
+      .innerText
+      .toLowerCase();
+
+    if (namaAlat.includes(filter)) {
+
+      row.style.display = "";
+
+    } else {
+
+      row.style.display = "none";
+
+    }
+
+  });
+
 }
 
 
