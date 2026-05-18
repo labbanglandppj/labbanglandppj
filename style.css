@@ -1616,11 +1616,9 @@ animation:
 
   justify-content: center;
 
-  width: fit-content;
+  width: auto;
 
-  min-width: unset;
-
-  padding: 8px 16px;
+  padding: 6px 12px;
 
   border-radius: 999px;
 
@@ -1628,7 +1626,7 @@ animation:
 
   font-weight: 700;
 
-  margin: 0 auto;
+  white-space: nowrap;
 }
 
 /* 🔥 RESPONSIVE */
@@ -1860,7 +1858,7 @@ animation:
 /* STATUS MONITORING */
 .monitoring-table th:nth-child(6),
 .monitoring-table td:nth-child(6) {
-  width: 110px;
+  width: 70px;
   text-align: center;
 }
 
