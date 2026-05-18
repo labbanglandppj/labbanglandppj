@@ -575,6 +575,32 @@ body::before {
 
 
 /* ========================= */
+/* 🔍 SEARCH BOX */
+/* ========================= */
+
+.search-box {
+    width: 420px;
+    margin: 25px auto 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 12px 18px;
+    border-radius: 18px;
+}
+
+.search-box input {
+    flex: 1;
+    height: 45px;
+    border-radius: 14px;
+    border: 2px solid #4b83ff;
+    padding: 0 15px;
+    font-size: 16px;
+}
+
+
+/* ========================= */
 /* TABLE */
 /* ========================= */
 .table-container {

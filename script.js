@@ -1,6 +1,7 @@
 // 🔥 URL API GOOGLE APPS SCRIPT
 const API_URL = "https://script.google.com/macros/s/AKfycbx7MwGGPT_P2_fOuq3NLXtQ7qYQ8reAEIFG7jt2c9uXM8E5AQVO11uKQ2A7c3rZ4lGY/exec";
 
+
 // ============================
 // 🔐 LOGIN SYSTEM
 // ============================
@@ -196,6 +197,8 @@ function loadDataAlat() {
   fetch(API_URL)
     .then(res => res.json())
     .then(data => {
+      
+      console.log("DATA MASUK:", data);
 
       const tableBody = document.getElementById("tableBody");
       tableBody.innerHTML = "";
@@ -271,8 +274,14 @@ function loadDataAlat() {
 
     })
     .catch(err => {
-      console.error("Error API:", err);
-      alert("Gagal ambil data dari API");
+
+      console.error("DETAIL ERROR:", err);
+
+      alert(
+        "Gagal ambil data dari API\n\n" +
+        err.message
+      );
+
     });
 }
 
@@ -557,8 +566,15 @@ function hideLoading() {
 // 🔥 AMANIN TEXT
 // ============================
 function escapeHtml(text) {
-  if (!text) return "";
-  return text.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+
+  if (text === null || text === undefined)
+    return "";
+
+  text = String(text);
+
+  return text
+    .replace(/'/g, "\\'")
+    .replace(/"/g, "&quot;");
 }
 
 
@@ -1152,27 +1168,21 @@ function hapusTataTertib(id) {
 // ============================
 function searchDataAlat() {
 
-  const input =
-    document.getElementById("searchInput");
-
-  if (!input) return;
-
-  const filter =
-    input.value.toLowerCase();
+  const keyword =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
 
   const rows =
-    document.querySelectorAll(
-      "#tableBody tr"
-    );
+    document.querySelectorAll("#tableBody tr");
 
   rows.forEach(row => {
 
-    const namaAlat =
-      row.children[1]
-      .innerText
-      .toLowerCase();
+    const text =
+      row.innerText.toLowerCase();
 
-    if (namaAlat.includes(filter)) {
+    if (text.includes(keyword)) {
 
       row.style.display = "";
 
@@ -1183,7 +1193,6 @@ function searchDataAlat() {
     }
 
   });
-
 }
 
 
@@ -1193,4 +1202,3 @@ function searchDataAlat() {
 window.onload = function() {
   updateAdminUI();
 };
-
