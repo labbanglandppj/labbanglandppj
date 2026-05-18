@@ -1858,8 +1858,12 @@ animation:
 /* STATUS MONITORING */
 .monitoring-table th:nth-child(6),
 .monitoring-table td:nth-child(6) {
-  width: 130px;
+  width: 150px;
   text-align: center;
+}
+
+.monitoring-table th {
+  white-space: nowrap;
 }
 
 /* ========================= */
