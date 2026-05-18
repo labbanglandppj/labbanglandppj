@@ -2473,10 +2473,10 @@ animation:
 }
 
 /* ========================= */
-/* 🔥 KHUSUS TABEL RIWAYAT */
+/* 🔥 KHUSUS RIWAYAT FIX */
 /* ========================= */
 
-.riwayat-table {
+table.riwayat-table {
 
   width: 100%;
 
@@ -2486,8 +2486,8 @@ animation:
 }
 
 /* NO */
-.riwayat-table th:nth-child(1),
-.riwayat-table td:nth-child(1) {
+table.riwayat-table th:nth-child(1),
+table.riwayat-table td:nth-child(1) {
 
   width: 20px !important;
 
@@ -2495,8 +2495,8 @@ animation:
 }
 
 /* TANGGAL */
-.riwayat-table th:nth-child(2),
-.riwayat-table td:nth-child(2) {
+table.riwayat-table th:nth-child(2),
+table.riwayat-table td:nth-child(2) {
 
   width: 160px !important;
 
@@ -2504,15 +2504,15 @@ animation:
 }
 
 /* NAMA ALAT */
-.riwayat-table th:nth-child(3),
-.riwayat-table td:nth-child(3) {
+table.riwayat-table th:nth-child(3),
+table.riwayat-table td:nth-child(3) {
 
   width: 300px !important;
 }
 
 /* PERUBAHAN */
-.riwayat-table th:nth-child(4),
-.riwayat-table td:nth-child(4) {
+table.riwayat-table th:nth-child(4),
+table.riwayat-table td:nth-child(4) {
 
   width: 150px !important;
 
