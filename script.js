@@ -1161,20 +1161,6 @@ function filterDataAlat() {
       .value
       .toLowerCase();
 
-  // ambil filter kondisi
-  const kondisi =
-    document
-      .getElementById("filterKondisi")
-      .value
-      .toLowerCase();
-
-  // ambil filter status
-  const status =
-    document
-      .getElementById("filterStatus")
-      .value
-      .toLowerCase();
-
   // ambil semua row tabel
   const rows =
     document.querySelectorAll("#tableBody tr");
@@ -1184,30 +1170,12 @@ function filterDataAlat() {
     const nama =
       row.children[1].innerText.toLowerCase();
 
-    const kondisiText =
-      row.children[3].innerText.toLowerCase();
-
-    const statusText =
-      row.children[4].innerText.toLowerCase();
-
     // cek cocok atau tidak
     const cocokSearch =
       nama.includes(search);
 
-    const cocokKondisi =
-      kondisi === "" ||
-      kondisiText.includes(kondisi);
-
-    const cocokStatus =
-      status === "" ||
-      statusText.includes(status);
-
     // tampil/sembunyi
-    if (
-      cocokSearch &&
-      cocokKondisi &&
-      cocokStatus
-    ) {
+    if (cocokSearch)
 
       row.style.display = "";
 
