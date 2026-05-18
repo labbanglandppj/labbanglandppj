@@ -2218,23 +2218,15 @@ animation:
 /* ===================================== */
 /* 📱 RESPONSIVE MOBILE */
 /* ===================================== */
-/* =========================================
-   📱 HP TETAP MODE DESKTOP
-========================================= */
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
 
-  body{
-    overflow-x: auto;
-    overflow-y: auto;
+  body {
+    overflow-x: hidden;
   }
 
-  .container{
-    min-width: 1400px;
-    display: flex;
-    flex-direction: row;
+  .container {
+    flex-direction: column;
   }
-
-}
 
   /* ========================= */
   /* SIDEBAR MOBILE */
