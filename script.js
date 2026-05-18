@@ -1148,6 +1148,79 @@ function hapusTataTertib(id) {
 }
 
 
+// =========================
+// 🔥 SEARCH & FILTER DATA ALAT
+// =========================
+
+function filterDataAlat() {
+
+  // ambil keyword search
+  const search =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  // ambil filter kondisi
+  const kondisi =
+    document
+      .getElementById("filterKondisi")
+      .value
+      .toLowerCase();
+
+  // ambil filter status
+  const status =
+    document
+      .getElementById("filterStatus")
+      .value
+      .toLowerCase();
+
+  // ambil semua row tabel
+  const rows =
+    document.querySelectorAll("#tableBody tr");
+
+  rows.forEach(row => {
+
+    const nama =
+      row.children[1].innerText.toLowerCase();
+
+    const kondisiText =
+      row.children[3].innerText.toLowerCase();
+
+    const statusText =
+      row.children[4].innerText.toLowerCase();
+
+    // cek cocok atau tidak
+    const cocokSearch =
+      nama.includes(search);
+
+    const cocokKondisi =
+      kondisi === "" ||
+      kondisiText.includes(kondisi);
+
+    const cocokStatus =
+      status === "" ||
+      statusText.includes(status);
+
+    // tampil/sembunyi
+    if (
+      cocokSearch &&
+      cocokKondisi &&
+      cocokStatus
+    ) {
+
+      row.style.display = "";
+
+    } else {
+
+      row.style.display = "none";
+    }
+
+  });
+
+}
+
+
 // ============================
 // 🔥 AUTO CHECK ADMIN SAAT LOAD
 // ============================
