@@ -2229,7 +2229,7 @@ animation:
 @media screen and (max-width: 768px) {
 
   body {
-    overflow-x: hidden;
+    overflow-x: auto;
   }
 
   .container {
@@ -2303,7 +2303,7 @@ animation:
 
     padding: 20px 14px;
 
-    overflow-x: hidden;
+    overflow-x: auto;
   }
 
   /* ========================= */
@@ -2404,6 +2404,10 @@ animation:
   .tata-table {
 
     min-width: 900px;
+  }
+
+  .monitoring-card {
+  -webkit-overflow-scrolling: touch;
   }
 
   /* ========================= */
