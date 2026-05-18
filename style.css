@@ -2221,12 +2221,43 @@ animation:
 @media screen and (max-width: 768px) {
 
   body {
-    overflow-x: hidden;
+
+    overflow-x: auto;
   }
 
   .container {
-    flex-direction: column;
+
+    flex-direction: row;
+    min-width: 1400px;
+    height: 100vh;
   }
+
+  .sidebar {
+
+    width: 320px;
+    min-width: 320px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+  }
+
+  .content {
+
+    flex: 1;
+    min-width: 1000px;
+    overflow-x: auto;
+    padding: 30px;
+  }
+
+  .hero-box,
+  .dashboard-box,
+  .table-wrapper,
+  .tata-wrapper {
+
+    min-width: 1000px;
+  }
+
+}
 
   /* ========================= */
   /* SIDEBAR MOBILE */
