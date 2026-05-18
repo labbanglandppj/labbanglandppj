@@ -2471,3 +2471,50 @@ animation:
   }
 
 }
+
+/* ========================= */
+/* 🔥 KHUSUS TABEL RIWAYAT */
+/* ========================= */
+
+.riwayat-table {
+
+  width: 100%;
+
+  table-layout: fixed;
+
+  min-width: 1100px;
+}
+
+/* NO */
+.riwayat-table th:nth-child(1),
+.riwayat-table td:nth-child(1) {
+
+  width: 30px;
+
+  text-align: center;
+}
+
+/* TANGGAL */
+.riwayat-table th:nth-child(2),
+.riwayat-table td:nth-child(2) {
+
+  width: 140px;
+
+  text-align: center;
+}
+
+/* NAMA ALAT */
+.riwayat-table th:nth-child(3),
+.riwayat-table td:nth-child(3) {
+
+  width: 320px;
+}
+
+/* PERUBAHAN */
+.riwayat-table th:nth-child(4),
+.riwayat-table td:nth-child(4) {
+
+  width: 140px;
+
+  text-align: center;
+}
