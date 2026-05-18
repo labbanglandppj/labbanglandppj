@@ -1148,34 +1148,37 @@ function hapusTataTertib(id) {
 }
 
 
-// =========================
-// 🔥 SEARCH & FILTER DATA ALAT
-// =========================
+/* ========================= */
+/* 🔥 SEARCH DATA ALAT */
+/* ========================= */
 
 function filterDataAlat() {
 
-  // ambil keyword search
+  // 🔍 ambil keyword search
   const search =
     document
       .getElementById("searchInput")
       .value
       .toLowerCase();
 
-  // ambil semua row tabel
+  // 🔥 ambil semua row tabel
   const rows =
     document.querySelectorAll("#tableBody tr");
 
   rows.forEach(row => {
 
+    // 🔥 ambil nama alat
     const nama =
-      row.children[1].innerText.toLowerCase();
+      row.children[1]
+      .innerText
+      .toLowerCase();
 
-    // cek cocok atau tidak
+    // 🔥 cek cocok atau tidak
     const cocokSearch =
       nama.includes(search);
 
-    // tampil/sembunyi
-    if (cocokSearch)
+    // 🔥 tampil / sembunyi
+    if (cocokSearch) {
 
       row.style.display = "";
 
