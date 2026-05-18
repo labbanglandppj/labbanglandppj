@@ -1856,7 +1856,7 @@ animation:
 /* TERAKHIR DICEK */
 .monitoring-table th:nth-child(5),
 .monitoring-table td:nth-child(5) {
-  width: 150px;
+  width: 160px;
   text-align: center;
 }
 
