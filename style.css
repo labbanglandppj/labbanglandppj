@@ -1858,7 +1858,7 @@ animation:
 /* STATUS MONITORING */
 .monitoring-table th:nth-child(6),
 .monitoring-table td:nth-child(6) {
-  width: 100px;
+  width: 130px;
   text-align: center;
 }
 
