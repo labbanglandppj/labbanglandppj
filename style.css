@@ -746,17 +746,25 @@ button:nth-child(2):hover {
 
 /* BOX */
 .modal-content {
+
   background: white;
-  margin: 40px auto; /* 🔥 lebih natural dari 5% */
+
+  /* 🔥 GESER SEDIKIT KE KANAN */
+  margin: 40px auto 40px 47%;
+
   padding: 20px;
+
   width: 420px;
+
   border-radius: 15px;
+
   animation: fadeIn 0.3s;
 
-  /* 🔥 SCROLL FIX */
-  max-height: 80vh;       /* lebih kecil biar pasti scroll */
-  overflow-y: auto;       /* aktifkan scroll */
-  display: block;         /* pastikan tidak flex error */
+  max-height: 80vh;
+
+  overflow-y: auto;
+
+  display: block;
 }
 
 /* IMAGE MODAL */
@@ -2891,7 +2899,7 @@ table.riwayat-table td:nth-child(4) {
 /* NO */
 .peminjaman-table th:nth-child(1),
 .peminjaman-table td:nth-child(1) {
-  width: 20px;
+  width: 10px;
   text-align: center;
 }
 
@@ -2912,7 +2920,7 @@ table.riwayat-table td:nth-child(4) {
 /* JUMLAH */
 .peminjaman-table th:nth-child(4),
 .peminjaman-table td:nth-child(4) {
-  width: 30px;
+  width: 20px;
   text-align: center;
 }
 
@@ -2949,4 +2957,45 @@ table.riwayat-table td:nth-child(4) {
 .peminjaman-table td:nth-child(9) {
   width: 30px;
   text-align: center;
+}
+
+/* ========================= */
+/* 🔍 SEARCH PEMINJAMAN */
+/* ========================= */
+
+.search-container{
+  display:flex;
+  justify-content:center;
+
+  margin-top:-10px;
+  margin-bottom:12px;
+}
+
+.search-box{
+  width:320px;
+
+  background:#ffffff20;
+  backdrop-filter:blur(10px);
+
+  padding:10px 14px;
+
+  border-radius:14px;
+
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.search-box input{
+  width:100%;
+  border:none;
+  outline:none;
+
+  background:white;
+
+  padding:12px 16px;
+
+  border-radius:12px;
+
+  font-size:16px;
 }

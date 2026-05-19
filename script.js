@@ -64,15 +64,22 @@ function updateAdminUI() {
     btn.style.background =
       "linear-gradient(135deg, #2563eb, #3b82f6)";
     badge.style.display = "block";
-    menuRiwayat.style.display = "block";
-    menuMonitoring.style.display = "block";
+    if (menuRiwayat)
+      menuRiwayat.style.display = "block";
+
+    if (menuMonitoring)
+      menuMonitoring.style.display = "block";
+
   } else {
     btn.innerText = "🔐 Login Admin";
     btn.style.background =
       "linear-gradient(135deg, #2563eb, #3b82f6)";
     badge.style.display = "none";
-    menuRiwayat.style.display = "none";
-    menuMonitoring.style.display = "none";
+    if (menuRiwayat)
+      menuRiwayat.style.display = "none";
+
+    if (menuMonitoring)
+      menuMonitoring.style.display = "none";
   }
 }
 
@@ -84,7 +91,12 @@ function loadPage(page) {
   fetch(`pages/${page}.html`)
     .then(res => res.text())
     .then(data => {
-      document.getElementById("content").innerHTML = data;
+      const content =
+        document.getElementById("content");
+
+      if (!content) return;
+
+      content.innerHTML = data;
 
       document.querySelectorAll(".sidebar li").forEach(li => {
         li.classList.remove("active");
@@ -268,6 +280,7 @@ function loadDataAlat() {
       console.log("DATA MASUK:", data);
 
       const tableBody = document.getElementById("tableBody");
+      if (!tableBody) return;
       tableBody.innerHTML = "";
 
       const adminBox = document.getElementById("adminActions");
@@ -332,11 +345,11 @@ function loadDataAlat() {
         let row = `
           <tr>
             <td>${index + 1}</td>
-            <td>${item.nama_alat}</td>
+            <td>${capitalizeWords(item.nama_alat)}</td>
             <td>${item.jumlah}</td>
             <td>${badgeKondisi}</td>
-            <td>${item.status}</td>
-            <td>${item.lokasi}</td>
+            <td>${capitalizeWords(item.status)}</td>
+            <td>${capitalizeWords(item.lokasi)}</td>
             <td>
 
               <img
@@ -598,6 +611,8 @@ function openImageModal(gambar) {
   const thumbContainer =
     document.getElementById("fullscreenThumbnailContainer");
 
+  if (!thumbContainer) return;
+
   thumbContainer.innerHTML = "";
 
   galleryImages.forEach((img, index) => {
@@ -772,6 +787,8 @@ function openModal(nama, fungsi, kondisi, status, lokasi, gambar, tanggal) {
   const thumbnailContainer =
     document.getElementById("modalThumbnailContainer");
 
+  if (!thumbnailContainer) return;
+
   thumbnailContainer.innerHTML = "";
 
   images.forEach(img => {
@@ -790,8 +807,10 @@ function openModal(nama, fungsi, kondisi, status, lokasi, gambar, tanggal) {
   const monitoring = getMonitoringStatus(tanggal, kondisi);
   const el = document.getElementById("modalMonitoring");
 
-  el.innerText = monitoring.text;
-  el.style.color = monitoring.color;
+  if (el) {
+    el.innerText = monitoring.text;
+    el.style.color = monitoring.color;
+  }
 }
 
 
@@ -866,10 +885,17 @@ function loadDashboard() {
       });
 
       // isi ke dashboard
-      document.getElementById("totalAlat").innerText = total;
-      document.getElementById("alatLayak").innerText = layak;
-      document.getElementById("alatPerbaiki").innerText = perbaiki;
-      document.getElementById("alatRusak").innerText = rusak;
+      const totalEl = document.getElementById("totalAlat");
+      const layakEl = document.getElementById("alatLayak");
+      const perbaikiEl = document.getElementById("alatPerbaiki");
+      const rusakEl = document.getElementById("alatRusak");
+
+      if (!totalEl || !layakEl || !perbaikiEl || !rusakEl) return;
+
+      totalEl.innerText = total;
+      layakEl.innerText = layak;
+      perbaikiEl.innerText = perbaiki;
+      rusakEl.innerText = rusak;
 
     })
     .catch(err => {
@@ -1133,12 +1159,13 @@ function loadTataTertib() {
       // 🔥 EMPTY
       if (data.length === 0) {
 
-        empty.style.display = "block";
-
+        if (empty)
+          empty.style.display = "block";
         return;
       }
 
-      empty.style.display = "none";
+      if (empty)
+        empty.style.display = "none";
 
       data.forEach((item, index) => {
 
@@ -1417,14 +1444,16 @@ function loadPeminjaman() {
   // 🔥 ADMIN ONLY
   if (isAdmin()) {
 
-    adminAction.style.display = "block";
+    if (adminAction)
+      adminAction.style.display = "block";
 
     if (aksiHeader)
       aksiHeader.style.display = "table-cell";
 
   } else {
 
-    adminAction.style.display = "none";
+    if (adminAction)
+      adminAction.style.display = "none";
 
     if (aksiHeader)
       aksiHeader.style.display = "none";
@@ -1492,9 +1521,9 @@ function loadPeminjaman() {
 
             <td>${index + 1}</td>
 
-            <td>${item.nama_peminjam}</td>
+            <td>${capitalizeWords(item.nama_peminjam)}</td>
 
-            <td>${item.nama_alat}</td>
+            <td>${capitalizeWords(item.nama_alat)}</td>
 
             <td>${item.jumlah}</td>
 
@@ -1510,7 +1539,7 @@ function loadPeminjaman() {
 
             <td>${item.status}</td>
 
-            <td>${item.keperluan}</td>
+            <td>${capitalizeWords(item.keperluan)}</td>
 
             ${aksi}
 
@@ -1587,7 +1616,17 @@ function closePeminjamanModal() {
 // ============================
 // 📦 TAMBAH PEMINJAMAN
 // ============================
-function tambahPeminjaman() {
+async function tambahPeminjaman() {
+
+  showLoading("Menyimpan data peminjaman...");
+
+  const btn =
+    document.querySelector(
+      "#peminjamanModal button"
+    );
+
+  btn.disabled = true;
+  btn.innerText = "Menyimpan...";
 
   const params = new URLSearchParams();
 
@@ -1639,6 +1678,11 @@ function tambahPeminjaman() {
 
     if (res.status === "success") {
 
+      hideLoading();
+
+      btn.disabled = false;
+      btn.innerText = "Simpan";
+
       alert("Peminjaman berhasil ditambahkan");
 
       closePeminjamanModal();
@@ -1647,6 +1691,11 @@ function tambahPeminjaman() {
 
     } else {
 
+      hideLoading();
+
+      btn.disabled = false;
+      btn.innerText = "Simpan";
+
       alert("Gagal tambah peminjaman");
 
     }
@@ -1654,6 +1703,11 @@ function tambahPeminjaman() {
   })
 
   .catch(err => {
+
+    hideLoading();
+
+    btn.disabled = false;
+    btn.innerText = "Simpan";
 
     console.error(err);
 
@@ -1718,7 +1772,17 @@ function editPeminjaman(
 }
 
 
-function updatePeminjaman() {
+async function updatePeminjaman() {
+
+  showLoading("Mengupdate data peminjaman...");
+
+  const btn =
+    document.querySelector(
+      "#peminjamanModal button"
+    );
+
+  btn.disabled = true;
+  btn.innerText = "Mengupdate...";
 
   const params = new URLSearchParams();
 
@@ -1779,6 +1843,11 @@ function updatePeminjaman() {
 
     if (res.status === "success") {
 
+      hideLoading();
+
+      btn.disabled = false;
+      btn.innerText = "Update";
+
       alert("Peminjaman berhasil diupdate");
 
       closePeminjamanModal();
@@ -1787,6 +1856,11 @@ function updatePeminjaman() {
 
     } else {
 
+      hideLoading();
+
+      btn.disabled = false;
+      btn.innerText = "Update";
+
       alert("Gagal update peminjaman");
 
     }
@@ -1794,6 +1868,11 @@ function updatePeminjaman() {
   })
 
   .catch(err => {
+
+    hideLoading();
+
+    btn.disabled = false;
+    btn.innerText = "Update";
 
     console.error(err);
 
@@ -1850,6 +1929,61 @@ function hapusPeminjaman(id) {
     alert("Error hapus peminjaman");
 
   });
+}
+
+
+// ============================
+// 🔍 SEARCH PEMINJAMAN
+// ============================
+function searchPeminjaman() {
+
+  const keyword =
+    document
+      .getElementById("searchPeminjaman")
+      .value
+      .toLowerCase();
+
+  const rows =
+    document.querySelectorAll("#peminjamanBody tr");
+
+  rows.forEach(row => {
+
+    const text =
+      row.innerText.toLowerCase();
+
+    if (text.includes(keyword)) {
+
+      row.style.display = "";
+
+    } else {
+
+      row.style.display = "none";
+
+    }
+
+  });
+}
+
+
+// ============================
+// 🔥 AUTO KAPITAL AWAL KATA
+// ============================
+function capitalizeWords(text) {
+
+  if (!text) return "";
+
+  return text
+    .trim()
+    .split(" ")
+    .map(word => {
+
+      if (word.length === 0) return "";
+
+      return word.charAt(0).toUpperCase() +
+             word.slice(1).toLowerCase();
+
+    })
+    .join(" ");
 }
 
 
