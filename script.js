@@ -1576,7 +1576,7 @@ function openTambahPeminjaman() {
 
   document.getElementById("p_nama").value = "";
 
-  document.getElementById("p_alat").value = "";
+  loadDropdownAlat();
 
   document.getElementById("p_jumlah").value = "";
 
@@ -1743,7 +1743,7 @@ function editPeminjaman(
 
   document.getElementById("p_nama").value = nama;
 
-  document.getElementById("p_alat").value = alat;
+  loadDropdownAlat(alat);
 
   document.getElementById("p_jumlah").value = jumlah;
 
@@ -1984,6 +1984,83 @@ function capitalizeWords(text) {
 
     })
     .join(" ");
+}
+
+
+// ============================
+// 🔥 LOAD DROPDOWN NAMA ALAT
+// ============================
+async function loadDropdownAlat(selected = "") {
+
+  const select =
+    document.getElementById("p_alat");
+
+  if (!select) return;
+
+  try {
+
+    const res =
+      await fetch(API_URL);
+
+    const data =
+      await res.json();
+
+    // 🔥 RESET OPTION
+    select.innerHTML = `
+      <option value="">
+        Pilih Nama Alat
+      </option>
+    `;
+
+    data.forEach(item => {
+
+      const option =
+        document.createElement("option");
+
+      option.value =
+        item.nama_alat;
+
+      option.textContent =
+        capitalizeWords(item.nama_alat);
+
+      // 🔥 AUTO SELECT SAAT EDIT
+      if (item.nama_alat === selected) {
+
+        option.selected = true;
+
+      }
+
+      select.appendChild(option);
+
+    });
+
+    // 🔥 AKTIFKAN SEARCH DROPDOWN
+    if (select.tomselect) {
+
+      select.tomselect.destroy();
+
+    }
+
+    new TomSelect("#p_alat", {
+
+      create: false,
+
+      sortField: {
+        field: "text",
+        direction: "asc"
+      },
+
+      placeholder: "Cari atau pilih alat..."
+
+    });
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Gagal load data alat");
+
+  }
 }
 
 

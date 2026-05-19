@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LAB BANGLAND PPJ</title>
   <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/tom-select/dist/css/tom-select.css"
+  />
+
+  <script src="https://cdn.jsdelivr.net/npm/tom-select/dist/js/tom-select.complete.min.js"></script>
 </head>
 
 <body>
@@ -373,11 +380,15 @@
         placeholder="Nama Peminjam"
         style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
 
-      <input
-        type="text"
+      <select
         id="p_alat"
-        placeholder="Nama Alat"
-        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;">
+
+        <option value="">
+          Pilih Nama Alat
+        </option>
+
+      </select>
 
       <input
         type="number"
