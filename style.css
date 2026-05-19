@@ -545,8 +545,18 @@ body::before {
 /* CARD DASHBOARD */
 /* ========================= */
 .card-container {
+
   display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
   gap: 20px;
+
+  flex-wrap: wrap;
+
+  width: 100%;
 }
 
 .card {
