@@ -1,0 +1,68 @@
+<div class="page-header">
+
+  <h1 class="page-title">
+    PEMINJAMAN ALAT
+  </h1>
+
+</div>
+
+
+<!-- 🔥 ADMIN BUTTON -->
+<div id="peminjamanAdminAction"
+  style="
+    display:none;
+    margin-bottom:20px;
+  ">
+
+  <button
+    onclick="openTambahPeminjaman()"
+    class="btn-tambah">
+
+    ➕ Tambah Peminjaman
+
+  </button>
+
+</div>
+
+
+<!-- 🔥 TABLE -->
+<div class="table-container">
+
+  <table class="peminjaman-table">
+
+    <thead>
+
+      <tr>
+
+        <th>No</th>
+
+        <th>Nama Peminjam</th>
+
+        <th>Nama Alat</th>
+
+        <th>Jumlah</th>
+
+        <th>Tanggal Pinjam</th>
+
+        <th>Tanggal Kembali</th>
+
+        <th>Status</th>
+
+        <th>Keperluan</th>
+
+        <th id="peminjamanAksiHeader"
+          style="display:none;">
+          Aksi
+        </th>
+
+      </tr>
+
+    </thead>
+
+    <tbody id="peminjamanBody">
+
+    </tbody>
+
+  </table>
+
+</div>

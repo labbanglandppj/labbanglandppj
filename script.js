@@ -101,6 +101,10 @@ function loadPage(page) {
       if (page === "tata-tertib") {
         loadTataTertib();
       }
+
+      if (page === "peminjaman") {
+        loadPeminjaman();
+      }
     });
 }
 
@@ -109,6 +113,7 @@ function loadPage(page) {
 // 🔥 FORMAT TANGGAL + JAM WIT
 // ============================
 function formatTanggalWIT(dateString) {
+
   if (!dateString) return "-";
 
   const bulan = [
@@ -116,20 +121,82 @@ function formatTanggalWIT(dateString) {
     "Juli","Agustus","September","Oktober","November","Desember"
   ];
 
+  // 🔥 HANDLE FORMAT YYYY-MM-DD
+  if (
+    typeof dateString === "string" &&
+    /^\d{4}-\d{2}-\d{2}$/.test(dateString)
+  ) {
+
+    const parts = dateString.split("-");
+
+    const tahun = parts[0];
+    const bulanNum = parseInt(parts[1]) - 1;
+    const hari = parts[2];
+
+    return `${hari} ${bulan[bulanNum]} ${tahun}`;
+  }
+
+  // 🔥 HANDLE ISO DATE
   const date = new Date(dateString);
 
-  const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
-  const witDate = new Date(utc + (9 * 60 * 60 * 1000));
+  if (isNaN(date.getTime())) {
+    return "-";
+  }
 
-  const hari = witDate.getDate();
-  const bulanText = bulan[witDate.getMonth()];
-  const tahun = witDate.getFullYear();
+  const utc =
+    date.getTime() +
+    (date.getTimezoneOffset() * 60000);
 
-  const jam = String(witDate.getHours()).padStart(2, "0");
-  const menit = String(witDate.getMinutes()).padStart(2, "0");
-  const detik = String(witDate.getSeconds()).padStart(2, "0");
+  const witDate =
+    new Date(utc + (9 * 60 * 60 * 1000));
 
-  return `${hari} ${bulanText} ${tahun}, ${jam}:${menit}:${detik} WIT`;
+  const hari =
+    witDate.getDate();
+
+  const bulanText =
+    bulan[witDate.getMonth()];
+
+  const tahun =
+    witDate.getFullYear();
+
+  const jam = String(
+    witDate.getHours()
+  ).padStart(2, "0");
+
+  const menit = String(
+    witDate.getMinutes()
+  ).padStart(2, "0");
+
+  const detik = String(
+    witDate.getSeconds()
+  ).padStart(2, "0");
+
+  return `${hari} ${bulanText} ${tahun}`;
+}
+
+
+// ============================
+// 🔥 FORMAT DATE INPUT
+// ============================
+function formatDateInput(dateString) {
+
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+
+  if (isNaN(date.getTime())) return "";
+
+  const tahun = date.getFullYear();
+
+  const bulan = String(
+    date.getMonth() + 1
+  ).padStart(2, "0");
+
+  const hari = String(
+    date.getDate()
+  ).padStart(2, "0");
+
+  return `${tahun}-${bulan}-${hari}`;
 }
 
 
@@ -210,9 +277,18 @@ function loadDataAlat() {
 
       data.forEach((item, index) => {
 
-        let gambar = (item.gambar_url && item.gambar_url !== "-")
-          ? item.gambar_url
-          : "https://via.placeholder.com/60";
+        let gambarList = [];
+
+        if (item.gambar_url) {
+
+          gambarList =
+            item.gambar_url.split("|||");
+        }
+
+        let gambar =
+          gambarList.length > 0
+            ? gambarList[0]
+            : "https://via.placeholder.com/60";
 
         let badgeKondisi = "";
 
@@ -233,7 +309,7 @@ function loadDataAlat() {
             '${item.kondisi}',
             '${item.status}',
             '${item.lokasi}',
-            '${gambar}',
+            '${item.gambar_url}',
             '${item.tanggal_update}'
           )">Detail</button>
         `;
@@ -262,9 +338,15 @@ function loadDataAlat() {
             <td>${item.status}</td>
             <td>${item.lokasi}</td>
             <td>
-              <img src="${gambar}" width="60" style="cursor:pointer"
-                onclick="openImageModal('${gambar}')">
-            </td>
+
+              <img
+                src="${gambar}"
+                width="60"
+                style="cursor:pointer"
+                onclick="openImageModal('${item.gambar_url}')"
+              >
+
+              </td>
             <td>${aksiButton}</td>
           </tr>
         `;
@@ -320,26 +402,57 @@ async function uploadToCloudinary(file) {
   return data.secure_url;
 }
 
+async function uploadMultipleToCloudinary(files) {
+
+  const uploadedUrls = [];
+
+  for (const file of files) {
+
+    const url =
+      await uploadToCloudinary(file);
+
+    uploadedUrls.push(url);
+  }
+
+  return uploadedUrls;
+}
+
 
 // ============================
 // 🖼️ PREVIEW GAMBAR UPLOAD
 // ============================
-function previewGambar() {
-  const fileInput = document.getElementById("t_gambar");
-  const preview = document.getElementById("previewUpload");
+function previewGambarMulti() {
 
-  const file = fileInput.files[0];
+  const fileInput =
+    document.getElementById("t_gambar");
 
-  if (file) {
+  const container =
+    document.getElementById("multiPreviewContainer");
+
+  container.innerHTML = "";
+
+  const files = fileInput.files;
+
+  if (!files.length) return;
+
+  Array.from(files).forEach(file => {
+
     const reader = new FileReader();
 
     reader.onload = function(e) {
-      preview.src = e.target.result;
-      preview.style.display = "block";
+
+      container.innerHTML += `
+        <div class="multi-preview-item">
+
+          <img src="${e.target.result}">
+
+        </div>
+      `;
     };
 
     reader.readAsDataURL(file);
-  }
+
+  });
 }
 
 
@@ -356,7 +469,8 @@ async function tambahData() {
     jumlah = " ";
   }
 
-  const file = document.getElementById("t_gambar").files[0];
+  const files =
+    document.getElementById("t_gambar").files;
 
   if (!nama) {
     alert("Nama alat wajib diisi!");
@@ -367,26 +481,17 @@ async function tambahData() {
 
   let imageUrl = "";
 
-  if (file) {
-    try {
-      imageUrl = await uploadToCloudinary(file);
-    } catch (err) {
-      alert("Gagal upload gambar");
-      return;
-    }
-  }
-
-  if (file) {
-
-    showLoading("Mengupload gambar alat...");
+  if (files.length > 0) {
 
     try {
 
-      imageUrl = await uploadToCloudinary(file);
+      const uploadedImages =
+        await uploadMultipleToCloudinary(files);
+
+    imageUrl =
+      uploadedImages.join("|||");
 
     } catch (err) {
-
-      hideLoading();
 
       alert("Gagal upload gambar");
 
@@ -438,8 +543,8 @@ async function tambahData() {
       document.getElementById("t_lokasi").value = "";
       document.getElementById("t_keterangan").value = "";
       document.getElementById("t_gambar").value = "";
-      document.getElementById("previewUpload").style.display = "none";
-      
+      document.getElementById("multiPreviewContainer").innerHTML = "";
+
       // ✅ DI SINI (PALING BAWAH DALAM IF SUCCESS)
       document.getElementById("tambahModal").removeAttribute("data-id");
     
@@ -470,14 +575,80 @@ function closeModal() {
 // ============================
 // 🖼️ OPEN MODAL FOTO
 // ============================
+let galleryImages = [];
+let currentGalleryIndex = 0;
+
 function openImageModal(gambar) {
+
   document.getElementById("imageModal").style.display = "flex";
 
-  // set gambar preview
-  document.getElementById("previewImage").src = gambar;
+  galleryImages =
+    gambar
+      ? gambar.split("|||")
+      : [];
 
-  // simpan URL untuk download
-  window.currentImage = gambar;
+  currentGalleryIndex = 0;
+
+  document.getElementById("previewImage").src =
+    galleryImages[0] || "";
+
+  window.currentImage =
+    galleryImages[0] || "";
+
+  const thumbContainer =
+    document.getElementById("fullscreenThumbnailContainer");
+
+  thumbContainer.innerHTML = "";
+
+  galleryImages.forEach((img, index) => {
+
+    thumbContainer.innerHTML += `
+      <img
+        src="${img}"
+        class="fullscreen-thumb"
+        onclick="setFullscreenImage(${index})"
+      >
+    `;
+  });
+}
+
+function setFullscreenImage(index) {
+
+  currentGalleryIndex = index;
+
+  document.getElementById("previewImage").src =
+    galleryImages[index];
+
+  window.currentImage =
+    galleryImages[index];
+}
+
+
+function nextImage() {
+
+  if (galleryImages.length === 0) return;
+
+  currentGalleryIndex++;
+
+  if (currentGalleryIndex >= galleryImages.length) {
+    currentGalleryIndex = 0;
+  }
+
+  setFullscreenImage(currentGalleryIndex);
+}
+
+
+function prevImage() {
+
+  if (galleryImages.length === 0) return;
+
+  currentGalleryIndex--;
+
+  if (currentGalleryIndex < 0) {
+    currentGalleryIndex = galleryImages.length - 1;
+  }
+
+  setFullscreenImage(currentGalleryIndex);
 }
 
 
@@ -521,11 +692,13 @@ window.onclick = function(event) {
   const loginModal = document.getElementById("loginModal");
   const tambahModal = document.getElementById("tambahModal");
   const imageModal = document.getElementById("imageModal");
+  const peminjamanModal = document.getElementById("peminjamanModal");
 
   if (event.target == modal) modal.style.display = "none";
   if (event.target == loginModal) loginModal.style.display = "none";
   if (event.target == tambahModal) tambahModal.style.display = "none";
   if (event.target == imageModal) imageModal.style.display = "none";
+  if (event.target == peminjamanModal) peminjamanModal.style.display = "none";
 };
 
 
@@ -588,7 +761,29 @@ function openModal(nama, fungsi, kondisi, status, lokasi, gambar, tanggal) {
   document.getElementById("modalStatus").innerText = status;
   document.getElementById("modalLokasi").innerText = lokasi;
 
-  document.getElementById("modalImage").src = gambar;
+  const images =
+    gambar
+      ? gambar.split("|||")
+      : [];
+
+  document.getElementById("modalImage").src =
+    images[0] || "";
+
+  const thumbnailContainer =
+    document.getElementById("modalThumbnailContainer");
+
+  thumbnailContainer.innerHTML = "";
+
+  images.forEach(img => {
+
+    thumbnailContainer.innerHTML += `
+      <img
+        src="${img}"
+        class="modal-thumb"
+        onclick="changeModalImage('${img}')"
+      >
+    `;
+  });
 
   document.getElementById("modalTanggal").innerText = formatTanggalWIT(tanggal);
 
@@ -1191,6 +1386,468 @@ function searchDataAlat() {
       row.style.display = "none";
 
     }
+
+  });
+}
+
+
+function changeModalImage(url) {
+
+  document.getElementById("modalImage").src =
+    url;
+}
+
+
+// ============================
+// 📦 LOAD PEMINJAMAN
+// ============================
+function loadPeminjaman() {
+
+  const body =
+    document.getElementById("peminjamanBody");
+
+  const adminAction =
+    document.getElementById("peminjamanAdminAction");
+
+  const aksiHeader =
+    document.getElementById("peminjamanAksiHeader");
+
+  if (!body) return;
+
+  // 🔥 ADMIN ONLY
+  if (isAdmin()) {
+
+    adminAction.style.display = "block";
+
+    if (aksiHeader)
+      aksiHeader.style.display = "table-cell";
+
+  } else {
+
+    adminAction.style.display = "none";
+
+    if (aksiHeader)
+      aksiHeader.style.display = "none";
+  }
+
+  fetch(API_URL + "?action=getPeminjaman")
+
+    .then(res => res.json())
+
+    .then(data => {
+
+      body.innerHTML = "";
+
+      // 🔥 KOSONG
+      if (data.length === 0) {
+
+        body.innerHTML = `
+          <tr>
+            <td colspan="9" style="
+              text-align:center;
+              padding:30px;
+            ">
+              Belum ada data peminjaman
+            </td>
+          </tr>
+        `;
+
+        return;
+      }
+
+      data.forEach((item, index) => {
+
+        let aksi = "";
+
+        if (isAdmin()) {
+
+          aksi = `
+            <td>
+
+              <button
+                onclick="editPeminjaman(
+                  '${item.id}',
+                  '${escapeHtml(item.nama_peminjam)}',
+                  '${escapeHtml(item.nama_alat)}',
+                  '${item.jumlah}',
+                  '${item.tanggal_pinjam}',
+                  '${item.tanggal_kembali}',
+                  '${item.status}',
+                  '${escapeHtml(item.keperluan)}'
+              )">
+                Edit
+              </button>
+
+              <button 
+                onclick="hapusPeminjaman('${item.id}')">
+                Hapus
+              </button>
+
+            </td>
+          `;
+        }
+
+        body.innerHTML += `
+          <tr>
+
+            <td>${index + 1}</td>
+
+            <td>${item.nama_peminjam}</td>
+
+            <td>${item.nama_alat}</td>
+
+            <td>${item.jumlah}</td>
+
+            <td>${formatTanggalWIT(item.tanggal_pinjam)}</td>
+
+            <td>
+              ${
+                item.tanggal_kembali
+                  ? formatTanggalWIT(item.tanggal_kembali)
+                  : "-"
+              }
+            </td>
+
+            <td>${item.status}</td>
+
+            <td>${item.keperluan}</td>
+
+            ${aksi}
+
+          </tr>
+        `;
+      });
+
+    })
+
+    .catch(err => {
+
+      console.error(err);
+
+      alert("Gagal load data peminjaman");
+
+    });
+}
+
+
+// ============================
+// 📦 OPEN MODAL PEMINJAMAN
+// ============================
+function openTambahPeminjaman() {
+
+  document.getElementById("peminjamanModal")
+    .style.display = "block";
+
+  // 🔥 RESET TITLE
+  document.querySelector("#peminjamanModal h2")
+    .innerText = "Tambah Peminjaman";
+
+  // 🔥 RESET FORM
+  document.getElementById("p_id").value = "";
+
+  document.getElementById("p_nama").value = "";
+
+  document.getElementById("p_alat").value = "";
+
+  document.getElementById("p_jumlah").value = "";
+
+  document.getElementById("p_tanggal_pinjam").value = "";
+
+  document.getElementById("p_tanggal_kembali").value = "";
+
+  document.getElementById("p_status").value = "Dipinjam";
+
+  document.getElementById("p_keperluan").value = "";
+
+  // 🔥 RESET BUTTON
+  const btn =
+    document.querySelector(
+      "#peminjamanModal button"
+    );
+
+  btn.innerText = "Simpan";
+
+  btn.setAttribute(
+    "onclick",
+    "tambahPeminjaman()"
+  );
+}
+
+
+// ============================
+// ❌ CLOSE MODAL PEMINJAMAN
+// ============================
+function closePeminjamanModal() {
+
+  document.getElementById("peminjamanModal")
+    .style.display = "none";
+}
+
+
+// ============================
+// 📦 TAMBAH PEMINJAMAN
+// ============================
+function tambahPeminjaman() {
+
+  const params = new URLSearchParams();
+
+  params.append("action", "tambahPeminjaman");
+
+  params.append(
+    "nama_peminjam",
+    document.getElementById("p_nama").value
+  );
+
+  params.append(
+    "nama_alat",
+    document.getElementById("p_alat").value
+  );
+
+  params.append(
+    "jumlah",
+    document.getElementById("p_jumlah").value
+  );
+
+  params.append(
+    "tanggal_pinjam",
+    document.getElementById("p_tanggal_pinjam").value
+  );
+
+  params.append(
+    "tanggal_kembali",
+    ""
+  );
+
+  params.append(
+    "status",
+    document.getElementById("p_status").value
+  );
+
+  params.append(
+    "keperluan",
+    document.getElementById("p_keperluan").value
+  );
+
+  fetch(API_URL, {
+    method: "POST",
+    body: params
+  })
+
+  .then(res => res.json())
+
+  .then(res => {
+
+    if (res.status === "success") {
+
+      alert("Peminjaman berhasil ditambahkan");
+
+      closePeminjamanModal();
+
+      loadPeminjaman();
+
+    } else {
+
+      alert("Gagal tambah peminjaman");
+
+    }
+
+  })
+
+  .catch(err => {
+
+    console.error(err);
+
+    alert("Error tambah peminjaman");
+
+  });
+}
+
+
+// ============================
+// ✏️ EDIT PEMINJAMAN
+// ============================
+function editPeminjaman(
+  id,
+  nama,
+  alat,
+  jumlah,
+  tanggalPinjam,
+  tanggalKembali,
+  status,
+  keperluan
+) {
+
+  document.getElementById("peminjamanModal")
+    .style.display = "block";
+
+  // 🔥 TITLE
+  document.querySelector("#peminjamanModal h2")
+    .innerText = "Edit Peminjaman";
+
+  // 🔥 ISI FORM
+  document.getElementById("p_id").value = id;
+
+  document.getElementById("p_nama").value = nama;
+
+  document.getElementById("p_alat").value = alat;
+
+  document.getElementById("p_jumlah").value = jumlah;
+
+  document.getElementById("p_tanggal_pinjam").value =
+    formatDateInput(tanggalPinjam);
+
+  document.getElementById("p_tanggal_kembali").value =
+    formatDateInput(tanggalKembali);
+
+  document.getElementById("p_status").value = status;
+
+  document.getElementById("p_keperluan").value = keperluan;
+
+  // 🔥 GANTI BUTTON
+  const btn =
+    document.querySelector(
+      "#peminjamanModal button"
+    );
+
+  btn.innerText = "Update";
+
+  btn.setAttribute(
+    "onclick",
+    "updatePeminjaman()"
+  );
+}
+
+
+function updatePeminjaman() {
+
+  const params = new URLSearchParams();
+
+  params.append(
+    "action",
+    "editPeminjaman"
+  );
+
+  params.append(
+    "id",
+    document.getElementById("p_id").value
+  );
+
+  // 🔥 TAMBAHAN WAJIB
+  params.append(
+    "nama_peminjam",
+    document.getElementById("p_nama").value
+  );
+
+  params.append(
+    "nama_alat",
+    document.getElementById("p_alat").value
+  );
+
+  params.append(
+    "jumlah",
+    document.getElementById("p_jumlah").value
+  );
+
+  params.append(
+    "tanggal_pinjam",
+    document.getElementById("p_tanggal_pinjam").value
+  );
+
+  params.append(
+    "tanggal_kembali",
+    document.getElementById("p_tanggal_kembali").value
+  );
+
+  params.append(
+    "status",
+    document.getElementById("p_status").value
+  );
+
+  params.append(
+    "keperluan",
+    document.getElementById("p_keperluan").value
+  );
+
+  fetch(API_URL, {
+    method: "POST",
+    body: params
+  })
+
+  .then(res => res.json())
+
+  .then(res => {
+
+    if (res.status === "success") {
+
+      alert("Peminjaman berhasil diupdate");
+
+      closePeminjamanModal();
+
+      loadPeminjaman();
+
+    } else {
+
+      alert("Gagal update peminjaman");
+
+    }
+
+  })
+
+  .catch(err => {
+
+    console.error(err);
+
+    alert("Error update peminjaman");
+
+  });
+}
+
+
+// ============================
+// ❌ HAPUS PEMINJAMAN
+// ============================
+function hapusPeminjaman(id) {
+
+  if (!confirm("Yakin hapus data peminjaman ini?"))
+    return;
+
+  const params = new URLSearchParams();
+
+  params.append(
+    "action",
+    "hapusPeminjaman"
+  );
+
+  params.append("id", id);
+
+  fetch(API_URL, {
+    method: "POST",
+    body: params
+  })
+
+  .then(res => res.json())
+
+  .then(res => {
+
+    if (res.status === "success") {
+
+      alert("Data peminjaman berhasil dihapus");
+
+      loadPeminjaman();
+
+    } else {
+
+      alert("Gagal hapus data");
+
+    }
+
+  })
+
+  .catch(err => {
+
+    console.error(err);
+
+    alert("Error hapus peminjaman");
 
   });
 }

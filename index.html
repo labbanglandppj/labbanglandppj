@@ -77,6 +77,10 @@
           <li onclick="loadPage('tata-tertib')">
             📘 TATA TERTIB
           </li>
+          
+          <li onclick="loadPage('peminjaman')">
+            📦 PEMINJAMAN ALAT
+          </li>
 
           <li id="menuMonitoring"
               onclick="loadPage('monitoring')"
@@ -163,8 +167,20 @@
 
       <span class="close" onclick="closeModal()">&times;</span>
       
-      <img id="modalImage" src="" alt="Foto Alat"
-        style="width:100%; border-radius:10px; margin-bottom:10px;">
+      <!-- 🔥 GALLERY FOTO -->
+      <div class="modal-gallery">
+
+        <img id="modalImage"
+          src=""
+          alt="Foto Alat">
+
+        <!-- 🔥 THUMBNAIL -->
+        <div id="modalThumbnailContainer"
+          class="modal-thumbnail-container">
+
+        </div>
+
+      </div>
 
       <h2 id="modalNama"></h2>
 
@@ -246,13 +262,18 @@
       <!-- 🔥 UPLOAD GAMBAR -->
       <label>Upload Gambar Alat</label>
 
-      <input type="file" id="t_gambar"
-        onchange="previewGambar()"
+      <input type="file"
+        id="t_gambar"
+        multiple
+        accept="image/*"
+        onchange="previewGambarMulti()"
         style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
 
-      <!-- 🔥 PREVIEW GAMBAR -->
-      <img id="previewUpload"
-        style="width:100%; margin-top:10px; border-radius:8px; display:none;">
+      <!-- 🔥 PREVIEW MULTI GAMBAR -->
+      <div id="multiPreviewContainer"
+        class="multi-preview-container">
+
+      </div>
 
       <button onclick="tambahData()" style="width:100%; padding:10px; margin-top:10px;">
         Simpan
@@ -267,16 +288,48 @@
   <!-- ========================= -->
   <div id="imageModal" class="image-modal">
 
-    <!-- tombol kembali -->
-    <span class="close-btn" onclick="closeImageModal()">✖</span>
+    <!-- tombol close -->
+    <span class="close-btn"
+      onclick="closeImageModal()">
+      ✖
+    </span>
 
     <!-- tombol download -->
-    <button class="download-btn" onclick="downloadImage()">
+    <button class="download-btn"
+      onclick="downloadImage()">
       ⬇️ Download
     </button>
 
-    <!-- gambar -->
-    <img id="previewImage" src="">
+    <!-- 🔥 WRAPPER -->
+    <div class="fullscreen-wrapper">
+
+      <!-- 🔥 tombol kiri -->
+      <button class="gallery-prev"
+        onclick="prevImage()">
+        ❮
+      </button>
+
+      <!-- isi gallery -->
+      <div class="fullscreen-gallery">
+
+        <!-- 🔥 gambar utama -->
+        <img id="previewImage" src="">
+      
+        <!-- thumbnail -->
+        <div id="fullscreenThumbnailContainer"
+          class="fullscreen-thumbnail-container">
+      
+        </div>
+
+      </div>
+
+      <!-- 🔥 tombol kanan -->
+      <button class="gallery-next"
+        onclick="nextImage()">
+        ❯
+      </button>
+
+    </div>
 
   </div>
 
@@ -298,6 +351,91 @@
 
   </div>
 
+  <!-- ========================= -->
+  <!-- 📦 MODAL PEMINJAMAN -->
+  <!-- ========================= -->
+  <div id="peminjamanModal" class="modal">
+
+    <div class="modal-content">
+
+      <span class="close"
+        onclick="closePeminjamanModal()">
+        &times;
+      </span>
+
+      <h2 id="peminjamanModalTitle">
+        Tambah Peminjaman
+      </h2>
+
+      <input
+        type="text"
+        id="p_nama"
+        placeholder="Nama Peminjam"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <input
+        type="text"
+        id="p_alat"
+        placeholder="Nama Alat"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <input
+        type="number"
+        id="p_jumlah"
+        placeholder="Jumlah"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <label>Tanggal Pinjam</label>
+
+      <input
+        type="date"
+        id="p_tanggal_pinjam"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <label>Tanggal Kembali</label>
+
+      <input
+        type="date"
+        id="p_tanggal_kembali"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+
+      <input
+        type="hidden"
+        id="p_id">
+
+      <label>Status</label>
+
+      <select
+        id="p_status"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;">
+
+        <option value="Dipinjam">
+          Dipinjam
+        </option>
+
+        <option value="Dikembalikan">
+          Dikembalikan
+        </option>
+
+      </select>
+
+      <textarea
+        id="p_keperluan"
+        placeholder="Keperluan Peminjaman"
+        style="width:100%; padding:10px; margin:8px 0; border-radius:6px;"></textarea>
+
+      <button
+        id="btnSimpanPeminjaman"
+        onclick="tambahPeminjaman()"
+        style="width:100%; padding:10px; margin-top:10px;">
+
+        Simpan
+
+      </button>
+
+    </div>
+
+  </div>
 
   <script src="script.js"></script>
 
