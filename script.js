@@ -2065,6 +2065,64 @@ async function loadDropdownAlat(selected = "") {
 
 
 // ============================
+// 🕒 LIVE CLOCK WIT
+// ============================
+
+function updateClock() {
+
+  const now = new Date();
+
+  const hari = [
+    "Minggu",
+    "Senin",
+    "Selasa",
+    "Rabu",
+    "Kamis",
+    "Jumat",
+    "Sabtu"
+  ];
+
+  const bulan = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember"
+  ];
+
+  const h = String(now.getHours()).padStart(2, "0");
+  const m = String(now.getMinutes()).padStart(2, "0");
+  const s = String(now.getSeconds()).padStart(2, "0");
+
+  const tanggal =
+    hari[now.getDay()] + ", " +
+    now.getDate() + " " +
+    bulan[now.getMonth()] + " " +
+    now.getFullYear();
+
+  const jam = `${h}:${m}:${s} WIT`;
+
+  const el = document.getElementById("liveClock");
+
+  if (el) {
+    el.innerHTML = `${tanggal} | ${jam}`;
+  }
+
+}
+
+setInterval(updateClock, 1000);
+
+updateClock();
+
+
+// ============================
 // 🔥 AUTO CHECK ADMIN SAAT LOAD
 // ============================
 window.onload = function() {

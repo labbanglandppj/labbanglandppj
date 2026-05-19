@@ -1783,9 +1783,27 @@ animation:
 
   border-collapse: collapse;
 
-  overflow: hidden;
-
   border-radius: 18px;
+}
+
+.monitoring-card {
+
+  max-height: 70vh;
+
+  overflow-y: auto;
+
+  overflow-x: auto;
+
+  position: relative;
+
+  padding-top: 0;
+}
+
+.monitoring-card table {
+
+  margin-top: 0;
+
+  border-spacing: 0;
 }
 
 .monitoring-card th {
@@ -1806,19 +1824,33 @@ animation:
   text-transform: uppercase;
 
   letter-spacing: 0.5px;
+
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.05);
+
+}
+
+.monitoring-card table {
+
+  position: relative;
+
 }
 
 .monitoring-card td {
 
   padding: 16px;
 
-  background: rgba(255,255,255,0.72);
+  background: #ffffff;
 
   border-bottom: 1px solid rgba(203,213,225,0.55);
 
   font-size: 14px;
 
   color: #0f172a;
+
+  position: relative;
+
+  z-index: 1;
 }
 
 /* 🔥 HOVER */
@@ -2311,7 +2343,7 @@ animation:
 
 .tata-table td {
 
-  background: rgba(255,255,255,0.75);
+  background: #ffffff;
 
   padding: 18px 16px;
 
@@ -3008,4 +3040,333 @@ table.riwayat-table td:nth-child(4) {
   border-radius:12px;
 
   font-size:16px;
+}
+
+.live-clock {
+
+  position: absolute;
+
+  top: 22px;
+
+  right: 35px;
+
+  z-index: 50;
+
+  font-size: 16px;
+
+  font-weight: 600;
+
+  color: rgba(226,232,240,0.78);
+
+  letter-spacing: 0.5px;
+
+  padding: 6px 12px;
+
+  border-radius: 12px;
+
+  background: rgba(30,41,59,0.12);
+
+  backdrop-filter: blur(6px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.08);
+
+}
+
+.tata-tertib-table tbody tr:hover {
+
+  background: rgba(59,130,246,0.08);
+
+  transition: 0.2s;
+
+}
+
+
+/* =========================================
+   🔥 FINAL FIX STICKY HEADER
+========================================= */
+
+table {
+
+  border-collapse: separate;
+
+  border-spacing: 0;
+}
+
+/* 🔥 HEADER BENAR-BENAR DI ATAS */
+table thead {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 5;
+}
+
+/* 🔥 HEADER SOLID */
+table thead th {
+
+  position: sticky;
+
+  top: -1px;
+
+  z-index: 99999;
+
+  background: #1e293b !important;
+
+  opacity: 1 !important;
+
+  transform: translateZ(0);
+
+  box-shadow: 0 2px 0 #1e293b;
+}
+
+/* 🔥 BODY DI BAWAH HEADER */
+table tbody {
+
+  position: relative;
+
+  z-index: 1;
+}
+
+/* =========================================
+   🔥 FIX KHUSUS MONITORING STICKY
+========================================= */
+
+/* KHUSUS MONITORING BARU STICKY */
+.monitoring-card .monitoring-table thead {
+
+  position: sticky !important;
+
+  top: 0 !important;
+
+  z-index: 9999 !important;
+}
+
+.monitoring-card .monitoring-table thead th {
+
+  position: sticky !important;
+
+  top: -1px !important;
+
+  z-index: 99999 !important;
+
+  background: #1e293b !important;
+
+  box-shadow: 0 2px 0 #1e293b !important;
+}
+
+
+/* =========================================
+   🔥 GLOBAL SCROLL TABLE FIX
+========================================= */
+
+.table-container {
+
+  max-height: 70vh !important;
+
+  overflow-y: auto !important;
+
+  overflow-x: auto !important;
+
+  position: relative;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 🔥 STICKY HEADER GLOBAL */
+.table-container thead {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 5;
+}
+
+.table-container thead th {
+
+  position: sticky;
+
+  top: -1px;
+
+  z-index: 99999;
+
+  background: #1e293b !important;
+
+  box-shadow: 0 2px 0 #1e293b;
+}
+
+
+/* =========================================
+   🔥 FINAL STICKY HEADER ALL TABLE
+========================================= */
+
+.table-container {
+
+  position: relative !important;
+
+  overflow-y: auto !important;
+
+  overflow-x: auto !important;
+
+  max-height: 70vh !important;
+}
+
+/* 🔥 HEADER MENETAP */
+.table-container table thead th {
+
+  position: sticky !important;
+
+  top: -1px !important;
+
+  z-index: 5 !important;
+
+  background: #1e293b !important;
+
+  color: white !important;
+
+  box-shadow: 0 2px 0 #1e293b !important;
+}
+
+/* 🔥 BIAR TIDAK TEMBUS */
+.table-container table thead {
+
+  position: sticky !important;
+
+  top: 0 !important;
+
+  z-index: 9999 !important;
+}
+
+/* =========================================
+   🔥 FINAL OFFSET STICKY HEADER
+========================================= */
+
+/* DATA ALAT */
+.table-container table thead th {
+
+  top: -1px !important;
+}
+
+/* BIAR ISI YANG LEWAT TERTUTUP */
+.table-container {
+
+  background: white;
+
+  padding-top: 0 !important;
+}
+
+/* HEADER TIDAK TRANSPARAN */
+.table-container table thead {
+
+  background: #1e293b !important;
+}
+
+
+/* =========================================
+   🔥 FIX SCROLL PEMINJAMAN ALAT
+========================================= */
+
+.peminjaman-scroll {
+
+    max-height: 650px !important;
+
+    overflow-y: auto !important;
+
+    overflow-x: auto !important;
+
+    position: relative !important;
+
+    border-radius: 20px !important;
+}
+
+/* HEADER STICKY */
+.peminjaman-scroll thead th {
+
+    position: sticky !important;
+
+    top: 0 !important;
+
+    z-index: 100 !important;
+
+    background: #1e293b !important;
+
+    color: white !important;
+}
+
+/* =========================================
+   🔥 FIX FINAL PEMINJAMAN
+========================================= */
+
+.peminjaman-scroll table {
+
+    border-collapse: separate !important;
+
+    border-spacing: 0 !important;
+}
+
+.peminjaman-scroll thead {
+
+    position: sticky !important;
+
+    top: 0 !important;
+
+    z-index: 9999 !important;
+}
+
+.peminjaman-scroll tbody {
+
+    position: relative;
+
+    z-index: 1;
+}
+
+/* =========================================
+   🔥 SCROLL PEMINJAMAN FINAL
+========================================= */
+
+.peminjaman-scroll {
+
+    max-height: 650px !important;
+
+    overflow-y: auto !important;
+
+    overflow-x: auto !important;
+
+    position: relative !important;
+
+    border-radius: 20px !important;
+}
+
+/* HEADER */
+.peminjaman-scroll thead th {
+
+    position: sticky !important;
+
+    top: 0 !important;
+
+    z-index: 10 !important;
+
+    background: #1e293b !important;
+
+    color: white !important;
+}
+
+/* =========================================
+   🔥 MODAL PALING ATAS
+========================================= */
+
+.modal {
+
+    z-index: 999999 !important;
+}
+
+.modal-content {
+
+    position: relative;
+
+    z-index: 999999 !important;
 }
