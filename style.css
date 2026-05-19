@@ -981,6 +981,7 @@ body.admin-mode th {
 /* ===================================================== */
 
 #loadingOverlay {
+
   display: none;
 
   position: fixed;
@@ -991,7 +992,7 @@ body.admin-mode th {
   width: 100%;
   height: 100%;
 
-  z-index: 99999;
+  z-index: 99999999;
 
   background: rgba(15,23,42,0.45);
 

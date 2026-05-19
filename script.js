@@ -778,7 +778,7 @@ function openModal(nama, fungsi, kondisi, status, lokasi, gambar, tanggal) {
 
   const images =
     gambar
-      ? gambar.split("|||")
+      ? [...new Set(gambar.split("|||"))]
       : [];
 
   document.getElementById("modalImage").src =
@@ -789,18 +789,31 @@ function openModal(nama, fungsi, kondisi, status, lokasi, gambar, tanggal) {
 
   if (!thumbnailContainer) return;
 
-  thumbnailContainer.innerHTML = "";
+  // 🔥 RESET TOTAL ISI CONTAINER
+  thumbnailContainer.replaceChildren();
 
-  images.forEach(img => {
+  // 🔥 THUMBNAIL HANYA MUNCUL JIKA GAMBAR > 1
+  if (images.length > 1) {
 
-    thumbnailContainer.innerHTML += `
-      <img
-        src="${img}"
-        class="modal-thumb"
-        onclick="changeModalImage('${img}')"
-      >
-    `;
-  });
+    images.forEach((img, index) => {
+
+      // 🔥 CEGAH DUPLIKAT
+      if (!img || img.trim() === "") return;
+
+      const imageEl = document.createElement("img");
+
+      imageEl.src = img;
+      imageEl.className = "modal-thumb";
+
+      imageEl.onclick = function () {
+        changeModalImage(img);
+      };
+
+      thumbnailContainer.appendChild(imageEl);
+
+    });
+
+  }
 
   document.getElementById("modalTanggal").innerText = formatTanggalWIT(tanggal);
 
