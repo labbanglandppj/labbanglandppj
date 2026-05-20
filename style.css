@@ -759,29 +759,56 @@ button:nth-child(2):hover {
 
   background: white;
 
-  /* 🔥 GESER SEDIKIT KE KANAN */
-  margin: 40px auto 40px 47%;
+  margin: 30px auto;
 
-  padding: 20px;
+  padding: 22px;
 
-  width: 420px;
+  width: fit-content;
 
-  border-radius: 15px;
+  min-width: 520px;
+
+  max-width: 92vw;
+
+  max-width: 92%;
+
+  border-radius: 18px;
 
   animation: fadeIn 0.3s;
 
-  max-height: 80vh;
+  /* 🔥 SCROLL MODAL */
+  max-height: 88vh;
 
   overflow-y: auto;
 
+  overflow-x: hidden;
+
   display: block;
+
+  box-sizing: border-box;
 }
 
 /* IMAGE MODAL */
 .modal-content img {
+
+  width: auto;
+
+  height: auto;
+
   max-width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
+
+  max-height: none;
+
+  object-fit: contain;
+
+  border-radius: 12px;
+
+  margin-bottom: 16px;
+
+  display: block;
+
+  margin-left: auto;
+
+  margin-right: auto;
 }
 
 /* TEXT */
@@ -2816,20 +2843,32 @@ table.riwayat-table td:nth-child(4) {
   width: 100%;
 
   margin-bottom: 15px;
+
+  overflow: auto;
+
+  text-align: center;
 }
 
 /* 🔥 FOTO UTAMA */
 .modal-gallery #modalImage {
 
-  width: 100%;
+  width: auto;
 
-  height: 240px;
+  height: auto;
 
-  object-fit: cover;
+  max-width: 100%;
+
+  max-height: 75vh;
+
+  object-fit: contain;
 
   border-radius: 14px;
 
-  background: #e2e8f0;
+  background: transparent;
+
+  display: block;
+
+  margin: 0 auto;
 }
 
 /* 🔥 THUMBNAIL CONTAINER */
