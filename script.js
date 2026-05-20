@@ -202,6 +202,36 @@ function formatTanggalWIT(dateString) {
 
 
 // ============================
+// 🔥 FORMAT KHUSUS RIWAYAT
+// ============================
+function formatTanggalRiwayat(tanggal) {
+
+  if (!tanggal) return "-";
+
+  // 🔥 FORMAT SPREADSHEET
+  // contoh:
+  // 20/5/2026, 13.43.03
+  if (
+    typeof tanggal === "string" &&
+    tanggal.includes("/")
+  ) {
+
+    return tanggal.replaceAll(".", ":");
+
+  }
+
+  // 🔥 FORMAT ISO LAMA
+  const date = new Date(tanggal);
+
+  if (isNaN(date)) return "-";
+
+  return date.toLocaleString("id-ID", {
+    timeZone: "Asia/Jayapura"
+  });
+}
+
+
+// ============================
 // 🔥 FORMAT DATE INPUT
 // ============================
 function formatDateInput(dateString) {
@@ -964,7 +994,9 @@ function tambahRiwayat(aktivitas, detail) {
 
   params.append(
     "tanggal",
-    new Date().toISOString()
+    new Date().toLocaleString("id-ID", {
+      timeZone: "Asia/Jayapura"
+    })
   );
 
   params.append(
@@ -1046,7 +1078,7 @@ function loadRiwayat() {
             <td>${index + 1}</td>
 
             <td>
-              ${formatTanggalWIT(item.tanggal)}
+              ${formatTanggalRiwayat(item.tanggal)}
             </td>
 
             <td>
