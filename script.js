@@ -134,6 +134,10 @@ function loadPage(page) {
       if (page === "peminjaman") {
         loadPeminjaman();
       }
+
+      if (page === "cek-alat") {
+        loadCekAlat();
+      }
     });
 }
 
@@ -2337,6 +2341,236 @@ function animatePageTransition() {
   content.classList.add(
     "page-transition"
   );
+}
+
+
+// ============================
+// 🔍 DATA CEK ALAT
+// ============================
+let cekAlatData = [];
+let peminjamanData = [];
+
+
+// ============================
+// 🔥 LOAD CEK ALAT
+// ============================
+async function loadCekAlat() {
+
+  try {
+
+    // 🔥 AMBIL DATA ALAT
+    const alatRes =
+      await fetch(API_URL);
+
+    cekAlatData =
+      await alatRes.json();
+
+    // 🔥 AMBIL DATA PEMINJAMAN
+    const pinjamRes =
+      await fetch(API_URL + "?action=getPeminjaman");
+
+    peminjamanData =
+      await pinjamRes.json();
+
+    renderCekAlat();
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert("Gagal load cek alat");
+
+  }
+
+}
+
+
+// ============================
+// 🔥 RENDER TABLE CEK ALAT
+// ============================
+function renderCekAlat() {
+
+  const body =
+    document.getElementById("cekAlatTableBody");
+
+  if (!body) return;
+
+  const keyword =
+    document
+      .getElementById("cekAlatSearch")
+      .value
+      .toLowerCase();
+
+  body.innerHTML = "";
+
+  // 🔥 FILTER
+  const filtered =
+    cekAlatData.filter(item => {
+
+      return item.nama_alat
+        .toLowerCase()
+        .includes(keyword);
+
+    });
+
+  // 🔥 JIKA KOSONG
+  if (filtered.length === 0) {
+
+    body.innerHTML = `
+      <tr>
+
+        <td colspan="3"
+          style="
+            text-align:center;
+            padding:30px;
+          ">
+
+          Data alat tidak ditemukan
+
+        </td>
+
+      </tr>
+    `;
+
+    return;
+  }
+
+  // 🔥 RENDER
+  filtered.forEach((item, index) => {
+
+    body.innerHTML += `
+      <tr>
+
+        <td>${index + 1}</td>
+
+        <td>
+          ${capitalizeWords(item.nama_alat)}
+        </td>
+
+        <td>
+
+          <button
+            class="btn-detail"
+            onclick="cekDetailAlat('${escapeHtml(item.nama_alat)}')">
+
+            Cek
+
+          </button>
+
+        </td>
+
+      </tr>
+    `;
+  });
+
+}
+
+
+// ============================
+// 🔥 CEK DETAIL ALAT
+// ============================
+function cekDetailAlat(namaAlat) {
+
+  // 🔥 DATA ALAT
+  const alat =
+    cekAlatData.find(item =>
+      item.nama_alat === namaAlat
+    );
+
+  if (!alat) {
+
+    alert("Data alat tidak ditemukan");
+
+    return;
+  }
+
+  // 🔥 FILTER PEMINJAMAN
+  const peminjamanAktif =
+    peminjamanData.filter(item => {
+
+      return (
+        item.nama_alat === namaAlat &&
+        item.status === "Dipinjam"
+      );
+
+    });
+
+  // 🔥 HITUNG TOTAL DIPINJAM
+  let totalDipinjam = 0;
+
+  peminjamanAktif.forEach(item => {
+
+    totalDipinjam +=
+      Number(item.jumlah || 0);
+
+  });
+
+  // 🔥 STOK
+  const totalAlat =
+    Number(alat.jumlah || 0);
+
+  const tersedia =
+    totalAlat - totalDipinjam;
+
+  // 🔥 STATUS
+  let statusText = "";
+
+  if (tersedia <= 0) {
+
+    statusText =
+      "🔴 Sedang Dipinjam / Tidak Tersedia";
+
+  } else {
+
+    statusText =
+      "🟢 Tersedia";
+
+  }
+
+  // 🔥 DETAIL
+  let detailPinjam = "";
+
+  if (peminjamanAktif.length > 0) {
+
+    detailPinjam += `
+      <br><br>
+      <b>Data Peminjaman Aktif:</b><br>
+    `;
+
+    peminjamanAktif.forEach(item => {
+
+      detailPinjam += `
+        • ${capitalizeWords(item.nama_peminjam)}
+        (${item.jumlah} unit)<br>
+      `;
+
+    });
+
+  }
+
+  // 🔥 ALERT DETAIL
+  alert(
+
+    "Nama Alat : " +
+    capitalizeWords(alat.nama_alat) +
+
+    "\n\nJumlah Total : " +
+    totalAlat +
+
+    "\nSedang Dipinjam : " +
+    totalDipinjam +
+
+    "\nTersedia : " +
+    tersedia +
+
+    "\n\nKondisi : " +
+    alat.kondisi +
+
+    "\nStatus : " +
+    statusText
+
+  );
+
 }
 
 

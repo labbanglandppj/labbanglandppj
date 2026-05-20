@@ -3443,7 +3443,7 @@ table tbody {
       0 0 6px rgba(255,255,255,0.9),
       0 0 18px rgba(147,197,253,0.65),
       0 0 35px rgba(59,130,246,0.35),
-      0 5px 18px rgba(0,0,0,0.45);
+      0 5px 18px rgba(0,0,0,0.45);{}y
   }
 
   50% {
@@ -3465,82 +3465,180 @@ table tbody {
   }
 }
 
-/* ========================================
-   EFEK CAHAYA PREMIUM BACKGROUND KANAN
-======================================== */
+/* ========================= */
+/* 🔍 CEK ALAT TABLE */
+/* ========================= */
 
-.dashboard-content {
-    position: relative;
-    overflow: hidden;
+.cek-alat-wrapper{
+  width: 70%;
+  margin: 30px auto;
 }
 
-/* cahaya biru kiri */
-.dashboard-content::before {
-    content: "";
-    position: absolute;
-    top: -120px;
-    left: 180px;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(
-        circle,
-        rgba(0, 174, 255, 0.30) 0%,
-        rgba(0, 174, 255, 0.15) 30%,
-        rgba(0, 174, 255, 0.05) 55%,
-        transparent 75%
-    );
-    filter: blur(40px);
-    animation: glowMove1 8s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
+.cek-alat-table{
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
 }
 
-/* cahaya kanan */
-.dashboard-content::after {
-    content: "";
-    position: absolute;
-    bottom: -150px;
-    right: -120px;
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.22) 0%,
-        rgba(0, 140, 255, 0.12) 35%,
-        rgba(0, 89, 255, 0.05) 60%,
-        transparent 80%
-    );
-    filter: blur(45px);
-    animation: glowMove2 10s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
+.cek-alat-table th{
+  background: #1e293b;
+  color: white;
+  padding: 16px;
+  text-align: center;
 }
 
-/* pastikan isi di atas efek */
-.dashboard-content > * {
-    position: relative;
-    z-index: 2;
+.cek-alat-table td{
+  padding: 14px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
 }
 
-/* animasi glow kiri */
-@keyframes glowMove1 {
-    0% {
-        transform: translate(0px, 0px) scale(1);
-    }
-
-    100% {
-        transform: translate(40px, 30px) scale(1.1);
-    }
+.btn-detail{
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
 }
 
-/* animasi glow kanan */
-@keyframes glowMove2 {
-    0% {
-        transform: translate(0px, 0px) scale(1);
-    }
-
-    100% {
-        transform: translate(-30px, -20px) scale(1.08);
-    }
+.btn-detail:hover{
+  background: #059669;
 }
 
+/* ========================= */
+/* 🔍 CEK ALAT */
+/* ========================= */
+
+.cek-alat-wrapper {
+
+  margin: 30px auto;
+
+  background: rgba(255,255,255,0.08);
+
+  backdrop-filter: blur(10px);
+
+  border-radius: 20px;
+
+  padding: 18px;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.25);
+
+}
+
+
+/* ========================= */
+/* 🔥 KONTROL LEBAR WRAPPER */
+/* ========================= */
+
+.cek-alat-wrapper.small {
+  width: 45%;
+}
+
+.cek-alat-wrapper.medium {
+  width: 65%;
+}
+
+.cek-alat-wrapper.large {
+  width: 90%;
+}
+
+
+/* ========================= */
+/* 🔥 TABLE */
+/* ========================= */
+
+.cek-alat-table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  overflow: hidden;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.95);
+
+}
+
+
+.cek-alat-table th {
+
+  background: #1e293b;
+
+  color: white;
+
+  padding: 16px;
+
+  font-size: 15px;
+
+  text-align: center;
+
+}
+
+
+.cek-alat-table td {
+
+  padding: 15px;
+
+  border-bottom: 1px solid #e5e7eb;
+
+  text-align: center;
+
+}
+
+
+/* ========================= */
+/* 🔥 KONTROL LEBAR KOLOM */
+/* ========================= */
+
+.col-no {
+  width: 80px;
+}
+
+.col-nama {
+  width: auto;
+}
+
+.col-aksi {
+  width: 140px;
+}
+
+
+/* ========================= */
+/* 🔥 BUTTON */
+/* ========================= */
+
+.btn-detail {
+
+  background: #10b981;
+
+  color: white;
+
+  border: none;
+
+  padding: 8px 16px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: 0.3s;
+
+}
+
+.btn-detail:hover {
+
+  transform: scale(1.05);
+
+  background: #059669;
+
+}
