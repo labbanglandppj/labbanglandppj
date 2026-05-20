@@ -2047,19 +2047,35 @@ animation:
 
   text-transform: uppercase;
 
-  font-size: 54px;
+  font-size: 60px;
 
-  font-weight: 900;
+  font-weight: 1000;
 
-  letter-spacing: 2px;
+  letter-spacing: 4px;
 
-  color: #0f172a;
+  color: #ffffff;
 
-  margin-bottom: 30px;
+  margin-bottom: 32px;
 
   text-shadow:
-    0 2px 10px rgba(255,255,255,0.35);
+    0 0 6px rgba(255,255,255,0.9),
+    0 0 18px rgba(147,197,253,0.65),
+    0 0 35px rgba(59,130,246,0.35),
+    0 5px 18px rgba(0,0,0,0.45);
+
+  -webkit-text-stroke: 1px rgba(255,255,255,0.15);
+
+  filter:
+    drop-shadow(0 2px 10px rgba(59,130,246,0.35));
+
+  position: relative;
+
+  z-index: 5;
+
+  animation:
+    dashboardGlow 3.5s ease-in-out infinite;
 }
+
 
 /* ========================= */
 /* 🔥 MONITORING HEADER CENTER */
@@ -3383,3 +3399,148 @@ table tbody {
 
     z-index: 999999 !important;
 }
+
+/* ============================
+   🚀 ANIMASI TRANSISI HALAMAN
+============================ */
+
+.page-transition {
+
+    animation:
+        pageFade 0.45s ease,
+        pageSlide 0.45s ease;
+}
+
+/* FADE */
+@keyframes pageFade {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* SLIDE */
+@keyframes pageSlide {
+
+    from {
+        transform: translateY(20px);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dashboardGlow {
+
+  0% {
+
+    text-shadow:
+      0 0 6px rgba(255,255,255,0.9),
+      0 0 18px rgba(147,197,253,0.65),
+      0 0 35px rgba(59,130,246,0.35),
+      0 5px 18px rgba(0,0,0,0.45);
+  }
+
+  50% {
+
+    text-shadow:
+      0 0 12px rgba(255,255,255,1),
+      0 0 30px rgba(96,165,250,0.85),
+      0 0 55px rgba(59,130,246,0.55),
+      0 8px 24px rgba(0,0,0,0.55);
+  }
+
+  100% {
+
+    text-shadow:
+      0 0 6px rgba(255,255,255,0.9),
+      0 0 18px rgba(147,197,253,0.65),
+      0 0 35px rgba(59,130,246,0.35),
+      0 5px 18px rgba(0,0,0,0.45);
+  }
+}
+
+/* ========================================
+   EFEK CAHAYA PREMIUM BACKGROUND KANAN
+======================================== */
+
+.dashboard-content {
+    position: relative;
+    overflow: hidden;
+}
+
+/* cahaya biru kiri */
+.dashboard-content::before {
+    content: "";
+    position: absolute;
+    top: -120px;
+    left: 180px;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+        circle,
+        rgba(0, 174, 255, 0.30) 0%,
+        rgba(0, 174, 255, 0.15) 30%,
+        rgba(0, 174, 255, 0.05) 55%,
+        transparent 75%
+    );
+    filter: blur(40px);
+    animation: glowMove1 8s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* cahaya kanan */
+.dashboard-content::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: -120px;
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.22) 0%,
+        rgba(0, 140, 255, 0.12) 35%,
+        rgba(0, 89, 255, 0.05) 60%,
+        transparent 80%
+    );
+    filter: blur(45px);
+    animation: glowMove2 10s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* pastikan isi di atas efek */
+.dashboard-content > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* animasi glow kiri */
+@keyframes glowMove1 {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    100% {
+        transform: translate(40px, 30px) scale(1.1);
+    }
+}
+
+/* animasi glow kanan */
+@keyframes glowMove2 {
+    0% {
+        transform: translate(0px, 0px) scale(1);
+    }
+
+    100% {
+        transform: translate(-30px, -20px) scale(1.08);
+    }
+}
+

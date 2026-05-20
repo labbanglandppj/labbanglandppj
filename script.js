@@ -112,6 +112,9 @@ function loadPage(page) {
 
       content.innerHTML = data;
 
+      // 🚀 ANIMASI TRANSISI
+      animatePageTransition();
+
       document.querySelectorAll(".sidebar li").forEach(li => {
         li.classList.remove("active");
       });
@@ -2310,6 +2313,31 @@ function updateClock() {
 setInterval(updateClock, 1000);
 
 updateClock();
+
+
+// ============================
+// 🚀 TRANSISI HALAMAN GLOBAL
+// ============================
+function animatePageTransition() {
+
+  const content =
+    document.getElementById("content");
+
+  if (!content) return;
+
+  // RESET
+  content.classList.remove(
+    "page-transition"
+  );
+
+  // TRIGGER ULANG ANIMASI
+  void content.offsetWidth;
+
+  // TAMBAH CLASS
+  content.classList.add(
+    "page-transition"
+  );
+}
 
 
 // ============================
