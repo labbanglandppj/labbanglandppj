@@ -3200,16 +3200,14 @@ table tbody {
 
 
 /* =========================================
-   🔥 GLOBAL SCROLL TABLE FIX
+   🔥 GLOBAL TABLE
 ========================================= */
 
 .table-container {
 
-  max-height: 70vh !important;
+  overflow-x: auto;
 
-  overflow-y: auto !important;
-
-  overflow-x: auto !important;
+  width: 100%;
 
   position: relative;
 
@@ -3307,78 +3305,22 @@ table tbody {
 
 
 /* =========================================
-   🔥 FIX SCROLL PEMINJAMAN ALAT
-========================================= */
-
-.peminjaman-scroll {
-
-    max-height: 650px !important;
-
-    overflow-y: auto !important;
-
-    overflow-x: auto !important;
-
-    position: relative !important;
-
-    border-radius: 20px !important;
-}
-
-/* HEADER STICKY */
-.peminjaman-scroll thead th {
-
-    position: sticky !important;
-
-    top: 0 !important;
-
-    z-index: 100 !important;
-
-    background: #1e293b !important;
-
-    color: white !important;
-}
-
-/* =========================================
-   🔥 FIX FINAL PEMINJAMAN
-========================================= */
-
-.peminjaman-scroll table {
-
-    border-collapse: separate !important;
-
-    border-spacing: 0 !important;
-}
-
-.peminjaman-scroll thead {
-
-    position: sticky !important;
-
-    top: 0 !important;
-
-    z-index: 9999 !important;
-}
-
-.peminjaman-scroll tbody {
-
-    position: relative;
-
-    z-index: 1;
-}
-
-/* =========================================
    🔥 SCROLL PEMINJAMAN FINAL
 ========================================= */
 
 .peminjaman-scroll {
 
-    max-height: 650px !important;
+    max-height: 70vh;
 
-    overflow-y: auto !important;
+    overflow-y: auto;
 
-    overflow-x: auto !important;
+    overflow-x: auto;
 
-    position: relative !important;
+    position: relative;
 
-    border-radius: 20px !important;
+    border-radius: 20px;
+
+    background: white;
 }
 
 /* HEADER */
@@ -3394,6 +3336,36 @@ table tbody {
 
     color: white !important;
 }
+
+
+/* 🔥 SCROLLBAR PEMINJAMAN */
+
+.peminjaman-scroll::-webkit-scrollbar {
+
+    width: 10px;
+
+    height: 10px;
+}
+
+.peminjaman-scroll::-webkit-scrollbar-track {
+
+    background: #e2e8f0;
+
+    border-radius: 20px;
+}
+
+.peminjaman-scroll::-webkit-scrollbar-thumb {
+
+    background: #94a3b8;
+
+    border-radius: 20px;
+}
+
+.peminjaman-scroll::-webkit-scrollbar-thumb:hover {
+
+    background: #64748b;
+}
+
 
 /* =========================================
    🔥 MODAL PALING ATAS

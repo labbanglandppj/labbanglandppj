@@ -18,13 +18,27 @@ function login() {
   const password = document.getElementById("password").value;
 
   if (username === "admin" && password === "123") {
+
     localStorage.setItem("isAdmin", "true");
+
+    // 🔥 SIMPAN RIWAYAT LOGIN
+    tambahRiwayat(
+      "Login Admin",
+      "Admin berhasil login ke sistem"
+    );
+
     alert("Login berhasil sebagai Admin");
+
     closeLogin();
+
     updateAdminUI();
+
     loadPage("data-alat");
+
   } else {
+
     alert("Username / Password salah!");
+
   }
 }
 
@@ -543,8 +557,21 @@ async function tambahData() {
       hideLoading();
 
       if (id) {
+
+        tambahRiwayat(
+          "Edit Data Alat",
+          `Mengedit data alat: ${nama}`
+        );
+
         alert("Data berhasil diupdate");
+
       } else {
+
+        tambahRiwayat(
+          "Tambah Data Alat",
+          `Menambahkan data alat: ${nama}`
+        );
+
         alert("Data berhasil ditambahkan");
       }
 
@@ -859,7 +886,13 @@ function hapusData(id) {
   .then(res => res.json())
   .then(res => {
     if (res.status === "success") {
+      tambahRiwayat(
+        "Hapus Data Alat",
+        `Menghapus data alat ID: ${id}`
+      );
+
       alert("Data berhasil dihapus");
+
       loadDataAlat();
     } else {
       alert("Gagal hapus data");
@@ -918,48 +951,127 @@ function loadDashboard() {
 
 
 // ============================
-// 🔥 LOAD RIWAYAT
+// 🕘 SIMPAN RIWAYAT GLOBAL
+// ============================
+function tambahRiwayat(aktivitas, detail) {
+
+  const params = new URLSearchParams();
+
+  params.append(
+    "action",
+    "tambahRiwayat"
+  );
+
+  params.append(
+    "tanggal",
+    new Date().toISOString()
+  );
+
+  params.append(
+    "aktivitas",
+    aktivitas
+  );
+
+  params.append(
+    "detail",
+    detail
+  );
+
+  fetch(API_URL, {
+    method: "POST",
+    body: params
+  })
+  .then(res => res.json())
+  .then(res => {
+
+    console.log("Riwayat tersimpan");
+
+  })
+  .catch(err => {
+
+    console.error(
+      "Gagal simpan riwayat",
+      err
+    );
+
+  });
+}
+
+
+// ============================
+// 🔥 LOAD RIWAYAT GLOBAL
 // ============================
 function loadRiwayat() {
-  fetch(API_URL)
+
+  const body =
+    document.getElementById("riwayatBody");
+
+  if (!body) return;
+
+  body.innerHTML = "";
+
+  fetch(API_URL + "?action=getRiwayat")
+
     .then(res => res.json())
+
     .then(data => {
 
-      const body = document.getElementById("riwayatBody");
-      if (!body) return;
+      // 🔥 JIKA KOSONG
+      if (data.length === 0) {
 
-      body.innerHTML = "";
+        body.innerHTML = `
+          <tr>
+
+            <td colspan="4"
+              style="
+                text-align:center;
+                padding:30px;
+              ">
+
+              Belum ada riwayat aktivitas
+
+            </td>
+
+          </tr>
+        `;
+
+        return;
+      }
 
       data.forEach((item, index) => {
 
-        let perubahan = "";
-
-        if (item.kondisi === "Layak") {
-          perubahan = "Kondisi Layak";
-        } 
-        else if (item.kondisi === "Perlu diperbaiki") {
-          perubahan = "Perlu diperbaiki";
-        } 
-        else {
-          perubahan = "Rusak";
-        }
-
         let row = `
           <tr>
+
             <td>${index + 1}</td>
-            <td>${formatTanggalWIT(item.tanggal_update)}</td>
-            <td>${item.nama_alat}</td>
-            <td>${perubahan}</td>
+
+            <td>
+              ${formatTanggalWIT(item.tanggal)}
+            </td>
+
+            <td>
+              ${item.aktivitas}
+            </td>
+
+            <td>
+              ${item.detail}
+            </td>
+
           </tr>
         `;
 
         body.innerHTML += row;
+
       });
 
     })
+
     .catch(err => {
+
       console.error(err);
+
       alert("Gagal load riwayat");
+
     });
 }
 
@@ -1265,6 +1377,11 @@ function openTambahTataTertib() {
 
     if (res.status === "success") {
 
+      tambahRiwayat(
+        "Tambah Tata Tertib",
+        aturan
+      );
+
       alert("Tata tertib berhasil ditambahkan");
 
       loadTataTertib();
@@ -1325,6 +1442,11 @@ function editTataTertib(id, isiLama) {
 
     if (res.status === "success") {
 
+      tambahRiwayat(
+        "Edit Tata Tertib",
+        aturanBaru
+      );
+
       alert("Tata tertib berhasil diupdate");
 
       loadTataTertib();
@@ -1375,6 +1497,11 @@ function hapusTataTertib(id) {
   .then(res => {
 
     if (res.status === "success") {
+
+      tambahRiwayat(
+        "Hapus Tata Tertib",
+        `Menghapus tata tertib ID: ${id}`
+      );
 
       alert("Tata tertib berhasil dihapus");
 
@@ -1696,6 +1823,13 @@ async function tambahPeminjaman() {
       btn.disabled = false;
       btn.innerText = "Simpan";
 
+      tambahRiwayat(
+        "Tambah Peminjaman",
+        document.getElementById("p_nama").value +
+        " meminjam " +
+        document.getElementById("p_alat").value
+      );
+
       alert("Peminjaman berhasil ditambahkan");
 
       closePeminjamanModal();
@@ -1861,6 +1995,12 @@ async function updatePeminjaman() {
       btn.disabled = false;
       btn.innerText = "Update";
 
+      tambahRiwayat(
+        "Edit Peminjaman",
+        document.getElementById("p_nama").value +
+        " mengupdate peminjaman alat"
+      );
+
       alert("Peminjaman berhasil diupdate");
 
       closePeminjamanModal();
@@ -1922,6 +2062,11 @@ function hapusPeminjaman(id) {
   .then(res => {
 
     if (res.status === "success") {
+
+      tambahRiwayat(
+        "Hapus Peminjaman",
+        `Menghapus data peminjaman ID: ${id}`
+      );
 
       alert("Data peminjaman berhasil dihapus");
 
