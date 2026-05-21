@@ -3541,11 +3541,17 @@ table tbody {
 
   padding: 15px;
 
-  text-align: center;
-
   border-bottom: 1px solid #e5e7eb;
 
   background: white;
+}
+
+/* 🔥 KOLOM NAMA ALAT RATA KIRI */
+.cek-alat-table td:nth-child(2) {
+
+  text-align: left;
+
+  padding-left: 24px;
 }
 
 
@@ -3557,12 +3563,12 @@ table tbody {
 
 .col-nama {
 
-  width: 260px;
+  width: 200px;
 }
 
 .col-aksi {
 
-  width: 100px;
+  width: 50px;
 }
 
 
