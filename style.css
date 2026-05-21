@@ -3496,7 +3496,9 @@ table tbody {
 
   overflow-y: auto;
 
-  overflow-x: hidden;
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
 }
 
 
@@ -3580,4 +3582,25 @@ table tbody {
   cursor: pointer;
 
   font-weight: 600;
+}
+
+/* 🔥 MOBILE SCROLL FIX */
+@media screen and (max-width: 768px) {
+
+  .cek-alat-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+  }
+
+  .cek-alat-scroll {
+
+    overflow-x: auto;
+  }
+
+  .cek-alat-table {
+
+    min-width: 700px;
+  }
 }
