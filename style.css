@@ -3465,56 +3465,14 @@ table tbody {
   }
 }
 
-/* ========================= */
-/* 🔍 CEK ALAT TABLE */
-/* ========================= */
 
-.cek-alat-wrapper{
-  width: 70%;
-  margin: 30px auto;
-}
-
-.cek-alat-table{
-  width: 100%;
-  border-collapse: collapse;
-  overflow: hidden;
-  border-radius: 18px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(10px);
-}
-
-.cek-alat-table th{
-  background: #1e293b;
-  color: white;
-  padding: 16px;
-  text-align: center;
-}
-
-.cek-alat-table td{
-  padding: 14px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-.btn-detail{
-  background: #10b981;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.btn-detail:hover{
-  background: #059669;
-}
-
-/* ========================= */
-/* 🔍 CEK ALAT */
-/* ========================= */
+/* =========================================
+   🔥 FINAL CEK ALAT
+========================================= */
 
 .cek-alat-wrapper {
+
+  width: 72%;
 
   margin: 30px auto;
 
@@ -3524,51 +3482,47 @@ table tbody {
 
   border-radius: 20px;
 
-  padding: 18px;
+  overflow: hidden;
 
   box-shadow:
     0 10px 30px rgba(0,0,0,0.25);
-
 }
 
 
-/* ========================= */
-/* 🔥 KONTROL LEBAR WRAPPER */
-/* ========================= */
+/* 🔥 SCROLL */
+.cek-alat-scroll {
 
-.cek-alat-wrapper.small {
-  width: 45%;
-}
+  max-height: 500px;
 
-.cek-alat-wrapper.medium {
-  width: 65%;
-}
+  overflow-y: auto;
 
-.cek-alat-wrapper.large {
-  width: 90%;
+  overflow-x: hidden;
 }
 
 
-/* ========================= */
 /* 🔥 TABLE */
-/* ========================= */
-
 .cek-alat-table {
 
   width: 100%;
 
-  border-collapse: collapse;
+  table-layout: fixed;
 
-  overflow: hidden;
+  border-collapse: separate;
 
-  border-radius: 14px;
+  border-spacing: 0;
 
   background: rgba(255,255,255,0.95);
-
 }
 
 
-.cek-alat-table th {
+/* 🔥 HEADER STICKY */
+.cek-alat-table thead th {
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 999;
 
   background: #1e293b;
 
@@ -3576,45 +3530,41 @@ table tbody {
 
   padding: 16px;
 
-  font-size: 15px;
-
   text-align: center;
-
 }
 
 
+/* 🔥 BODY */
 .cek-alat-table td {
 
   padding: 15px;
 
-  border-bottom: 1px solid #e5e7eb;
-
   text-align: center;
 
+  border-bottom: 1px solid #e5e7eb;
+
+  background: white;
 }
 
 
-/* ========================= */
-/* 🔥 KONTROL LEBAR KOLOM */
-/* ========================= */
-
+/* 🔥 KOLOM */
 .col-no {
-  width: 80px;
+
+  width: 10px;
 }
 
 .col-nama {
-  width: auto;
+
+  width: 260px;
 }
 
 .col-aksi {
-  width: 140px;
+
+  width: 100px;
 }
 
 
-/* ========================= */
 /* 🔥 BUTTON */
-/* ========================= */
-
 .btn-detail {
 
   background: #10b981;
@@ -3630,15 +3580,4 @@ table tbody {
   cursor: pointer;
 
   font-weight: 600;
-
-  transition: 0.3s;
-
-}
-
-.btn-detail:hover {
-
-  transform: scale(1.05);
-
-  background: #059669;
-
 }
